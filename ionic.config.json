@@ -1,0 +1,7 @@
+{
+  "name": "presentacion_grupos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
