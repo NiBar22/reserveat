@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <img src="assets/logo.png" alt="ReservEAT Logo" class="logo">
+    <h1 class="title">reservEAT</h1>
+    <p class="subtitle">RESERVAR NUNCA HA SIDO TAN FÁCIL</p>
+
+    <ion-button expand="block" color="dark" (click)="registerComensal()">
+      <div class="button-content">
+        <span>Soy comensal</span>
+        <ion-icon name="body-outline"></ion-icon>
+      </div>
+    </ion-button>
+
+    <ion-button expand="block" color="dark" (click)="registerRestaurante()">
+      <div class="button-content">
+        <span>Somos un restaurante</span>
+        <ion-icon name="restaurant-outline"></ion-icon>
+      </div>
+    </ion-button>
+
+    <p class="login-link" (click)="goToLogin()">ya tengo una cuenta</p>
+  </div>
+</ion-content>

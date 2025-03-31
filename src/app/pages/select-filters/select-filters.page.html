@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    (ionInput)="filterFilters()"
+    [placeholder]="userType === 'restaurant' ? 'Elige filtros que encajen con tu restaurante' : 'Selecciona los filtros que te apetecen'">
+  </ion-searchbar>
+
+  
+  <div class="filters-container">
+    <ion-chip
+      *ngFor="let filter of filteredFilters"
+      [color]="selectedFilters.includes(filter) ? 'success' : 'light'"
+      (click)="toggleFilter(filter)">
+      {{ filter }}
+    </ion-chip>
+  </div>
+
+  
+  <div class="selected-filters">
+    <ion-chip
+      *ngFor="let filter of selectedFilters; let i = index"
+      (click)="removeFilter(i)" color="success">
+      {{ filter }}
+    </ion-chip> 
+    
+    <ion-chip *ngFor="let empty of emptySlots" disabled>
+      ----
+    </ion-chip>
+  </div>
+
+ 
+  <ion-button color="dark" expand="full" [disabled]="selectedFilters.length === 0" (click)="finishRegistration()">
+    Terminar registro
+  </ion-button>
+</ion-content>

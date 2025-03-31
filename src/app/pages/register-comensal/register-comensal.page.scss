@@ -1,0 +1,107 @@
+ion-content {
+  --background: #E9EDC9;
+  display: block; // Evita que los elementos se centren verticalmente de forma absoluta
+  padding-top: 56px; // Ajusta para evitar que el contenido se solape con el header
+}
+
+ion-toolbar {
+  --background: #E9EDC9;
+}
+
+.container {
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  padding-top: 20px;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+}
+
+
+
+h2, h3 {
+  color: #1a1a1a;
+  text-align: left;
+  width: 100%;
+}
+
+ion-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profile-picture ion-icon {
+  font-size: 80px; /* Aumenta el tamaño del icono */
+  color: #a0a0a0;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+ion-input, ion-select {
+  color: #1a1a1a;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 7px 0;
+  width: 100%;
+}
+
+ion-button {
+  width: 90%;
+  font-weight: bold;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+ion-row {
+  margin-bottom: 2px; /* Añade espacio entre filas */
+}
+
+
+.back-button {
+  background: black;
+  color: white; 
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -3,23 +3,48 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
+    redirectTo: 'login', pathMatch: 'full'
+  },
+
+  {
+    path: 'loader',
+    loadComponent: () => import('./pages/loader/loader.page').then( m => m.LoaderPage)
   },
   {
-    path: 'todos',
-    loadComponent: () => import('./todos/todos.page').then( m => m.TodosPage)
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
   },
   {
-    path: 'video-juegos',
-    loadComponent: () => import('./video-juegos/video-juegos.page').then( m => m.VideoJuegosPage)
+    path: 'register-selection',
+    loadComponent: () => import('./pages/register-selection/register-selection.page').then( m => m.RegisterSelectionPage)
   },
   {
-    path: 'chat-bots',
-    loadComponent: () => import('./chat-bots/chat-bots.page').then( m => m.ChatBotsPage)
+    path: 'register-comensal',
+    loadComponent: () => import('./pages/register-comensal/register-comensal.page').then( m => m.RegisterComensalPage)
   },
   {
-    path: 'apps',
-    loadComponent: () => import('./apps/apps.page').then( m => m.AppsPage)
+    path: 'register-comensal',
+    loadComponent: () => import('./pages/register-comensal/register-comensal.page').then(m => m.RegisterComensalPage)
   },
+  {
+    path: 'register-restaurante',
+    loadComponent: () => import('./pages/register-restaurante/register-restaurante.page').then( m => m.RegisterRestaurantePage)
+  },  {
+    path: 'select-filters',
+    loadComponent: () => import('./pages/select-filters/select-filters.page').then( m => m.SelectFiltersPage)
+  },
+  {
+    path: 'home-screen',
+    loadComponent: () => import('./pages/home-screen/home-screen.page').then( m => m.HomeScreenPage)
+  },
+  {
+    path: 'select-rest-photos',
+    loadComponent: () => import('./pages/select-rest-photos/select-rest-photos.page').then( m => m.SelectRestPhotosPage)
+  },
+
+
+
+
+
   
 ];

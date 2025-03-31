@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #E9EDC9; /* Fondo igual en ambas pantallas */
+
+  .logo {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1a1a1a;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+  }
+
+  ion-input {
+    width: 80%;
+    background: #ffffff;
+    color: #000000;
+    padding: 12px; // Agrega espacio interno
+  --padding-start: 12px; // Ajusta el margen izquierdo
+  --padding-end: 12px; // Ajusta el margen derecho
+  border-radius: 10px; // Bordes redondeados opcionales
+    margin: 10px 0;
+    --placeholder-color: #999999; /* Para que el placeholder sea visible */
+  }
+
+  ion-button {
+    width: 80%;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  .register-link, .forgot-password {
+    font-size: 12px;
+    color: #1a1a1a;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+}

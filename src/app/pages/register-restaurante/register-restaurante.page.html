@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="back-button" (click)="router.navigate(['/register-selection'])">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h2>Completa los siguientes campos:</h2>
+
+    
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="center-content">
+            
+            <ion-col size="4" class="logo-container">
+              <div class="profile-picture" (click)="seleccionarLogo()">
+                <img *ngIf="logo" [src]="logo" alt="Logo del restaurante">
+                <ion-icon *ngIf="!logo" name="image-outline"></ion-icon>
+              </div>
+            </ion-col>
+
+            
+            <ion-col size="8">
+              <ion-input placeholder="Nombre del restaurante" [(ngModel)]="nombreRestaurante" (ionInput)="generarUsuario()"></ion-input>
+              <ion-input placeholder="NIT" [(ngModel)]="nit" type="text" (ionInput)="generarUsuario()"></ion-input>
+              <ion-input placeholder="Usuario" [(ngModel)]="usuario" disabled></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          
+          <ion-row>
+            <ion-col size="6">
+              <ion-input placeholder="Nombre del propietario" [(ngModel)]="propietarioNombre"></ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <ion-input placeholder="Apellidos del propietario" [(ngModel)]="propietarioApellidos"></ion-input>
+            </ion-col>
+          </ion-row>
+
+          
+          <ion-row>
+            <ion-col size="6">
+              <ion-input placeholder="Dirección" [(ngModel)]="direccion"></ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <ion-input placeholder="Teléfono de contacto" [(ngModel)]="telefono" type="tel"></ion-input>
+            </ion-col>
+          </ion-row>
+
+         
+          <ion-row>
+            <ion-col size="12">
+              <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password"></ion-input>
+              <ion-input placeholder="Verificar contraseña" [(ngModel)]="confirmPassword" type="password"></ion-input>
+              <p *ngIf="errorMensaje" class="error-message">{{ errorMensaje }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="full" color="light" (click)="registrar()">Siguiente</ion-button>
+  </div>
+</ion-content>

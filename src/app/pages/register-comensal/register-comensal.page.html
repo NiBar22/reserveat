@@ -1,0 +1,101 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="back-button" color = "dark" (click)="router.navigate(['/register-selection'])">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="false">
+  <div class="container">
+    <h2>Completa los siguientes campos:</h2>
+    
+    <ion-card>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          
+          <ion-col size="4" class="center-content">
+            <div class="profile-picture" (click)="seleccionarFoto()">
+              <img *ngIf="fotoPerfil; else defaultIcon" [src]="fotoPerfil" alt="Foto de perfil">
+              <ng-template #defaultIcon>
+                <ion-icon name="image-outline"></ion-icon>
+              </ng-template>
+            </div>
+          </ion-col>
+    
+          
+          <ion-col size="8" class="input-container">
+            <ion-input placeholder="Usuario" [(ngModel)]="usuario"></ion-input>
+            <ion-input placeholder="Nombres" [(ngModel)]="nombres" ></ion-input>
+            <ion-input placeholder="Apellidos" [(ngModel)]="apellidos" ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    
+
+    <h3>Datos de perfil:</h3>
+    <ion-card>
+      <ion-grid>
+        
+        <ion-row>
+          <ion-col size="6">
+            <ion-input placeholder="Dirección" [(ngModel)]="direccion" ></ion-input>
+          </ion-col>
+          <ion-col size="6">
+            <ion-input placeholder="Teléfono de contacto" [(ngModel)]="telefono" ></ion-input>
+          </ion-col>
+        </ion-row>
+    
+        
+        <ion-row>
+          <ion-col size="6">
+            <ion-select placeholder="Tipo de Documento" [(ngModel)]="tipoDocumento" >
+              <ion-select-option value="cc">Cédula de Ciudadanía</ion-select-option>
+              <ion-select-option value="ti">Tarjeta de Identidad</ion-select-option>
+              <ion-select-option value="pasaporte">Pasaporte</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col size="6">
+            <ion-input placeholder="Número de Documento" [(ngModel)]="numeroDocumento" ></ion-input>
+          </ion-col>
+        </ion-row>
+    
+        
+        <ion-row>
+          <ion-col size="12">
+            <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password" ></ion-input>
+          </ion-col>
+        </ion-row>
+    
+        
+        <ion-row>
+          <ion-col size="12">
+            <ion-input placeholder="Confirmar Contraseña" [(ngModel)]="confirmPassword" type="password" ></ion-input>
+          </ion-col>
+        </ion-row>
+    
+    
+        <ion-row>
+          <ion-col size="12">
+            <div class="error-container">
+              <p *ngIf="errorMensaje" class="error-message">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                {{ errorMensaje }}
+              </p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-button 
+    expand="block" 
+    color="light" 
+    (click)="registrar()" 
+    [disabled]="allFieldsEmpty()">
+    Registrarse
+  </ion-button>
+  </div>
+</ion-content>

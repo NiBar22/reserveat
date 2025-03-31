@@ -1,0 +1,49 @@
+ion-toolbar{
+    --background: #E9EDC9;
+}
+.back-button {
+  background: black;
+  color: white; 
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-content{
+    --background: #E9EDC9;
+}
+
+ion-searchbar{
+    --background: #ffffff;
+}
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .selected-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  ion-chip {
+    font-size: 14px;
+    padding: 10px;
+    
+  }
+  
+  ion-chip[disabled] {
+    background-color: lightgray;
+    color: gray;
+  }
+
+  
+  
