@@ -1,7 +1,7 @@
 ion-content {
   --background: #E9EDC9;
-  display: block; // Evita que los elementos se centren verticalmente de forma absoluta
-  padding-top: 56px; // Ajusta para evitar que el contenido se solape con el header
+  display: block; 
+  padding-top: 56px; 
 }
 
 ion-toolbar {
@@ -60,7 +60,7 @@ ion-card {
 }
 
 .profile-picture ion-icon {
-  font-size: 80px; /* Aumenta el tamaño del icono */
+  font-size: 80px; 
   color: #a0a0a0;
 }
 
@@ -93,7 +93,7 @@ ion-button {
 }
 
 ion-row {
-  margin-bottom: 2px; /* Añade espacio entre filas */
+  margin-bottom: 2px; 
 }
 
 
