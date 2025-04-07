@@ -16,7 +16,7 @@ import { arrowBackOutline } from 'ionicons/icons';
   imports: [IonContent, IonSearchbar, IonButton, IonIcon, CommonModule, FormsModule, IonChip, IonHeader, IonToolbar, IonButtons]
 })
 export class SelectFiltersPage {
-  userType: string = ''; 
+  userType: string = 'comensal'; // Valor por defecto
   searchQuery: string = '';
   filters: string[] = [
     'Fast food', 'Temático', 'Buffet', 'Gourmet', 'Fusión', 'Familiar',
@@ -24,28 +24,26 @@ export class SelectFiltersPage {
     'Hamburguesas', 'Pizza', 'Italiano', 'Asiático', 'Peruano', 'Boliviano',
     'Hot dogs', 'Indú', 'Tailandés', 'Vegano', 'Tradicional', 'Casero', 'Mexicano'
   ];
-  filteredFilters: string[] = [...this.filters]; 
+  filteredFilters: string[] = [...this.filters];
   selectedFilters: string[] = [];
-  maxFilters: number = 6; // Predeterminado para restaurante
+  maxFilters: number = 6;
 
-  constructor(public router: Router, private route: ActivatedRoute ) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     addIcons({ arrowBackOutline });
 
+    // Detectar si el usuario es restaurante
     this.route.queryParams.subscribe(params => {
       this.userType = params['userType'] || 'comensal';
-  
       this.maxFilters = this.userType === 'restaurant' ? 6 : 9;
     });
   }
 
-  // Filtrar los campos
   filterFilters() {
     this.filteredFilters = this.filters.filter(filter =>
       filter.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 
-  // Agregar o quitar un filtro seleccionado
   toggleFilter(filter: string) {
     if (this.selectedFilters.includes(filter)) {
       this.selectedFilters = this.selectedFilters.filter(f => f !== filter);
@@ -54,31 +52,29 @@ export class SelectFiltersPage {
     }
   }
 
-  // Remover un filtro desde las casillas seleccionadas
   removeFilter(index: number) {
     this.selectedFilters.splice(index, 1);
   }
 
-  // Generar casillas vacías según el límite
   get emptySlots() {
     return new Array(this.maxFilters - this.selectedFilters.length);
   }
 
-  // Terminar registro y redirigir
   finishRegistration() {
     console.log('Filtros seleccionados:', this.selectedFilters);
-  
+
     if (this.userType === 'restaurant') {
-      this.router.navigate(['/select-rest-photos']); 
+      this.router.navigate(['/restaurant-uploads'], { queryParams: { userType: 'restaurant' } });
     } else {
-      this.router.navigate(['/home-screen']); 
+      this.router.navigate(['/home-screen']);
     }
   }
 
-  // Regresar a la pantalla anterior
   goBack() {
-    this.router.navigate(['/register-comensal']); 
+    if (this.userType === 'restaurant') {
+      this.router.navigate(['/register-restaurant']);
+    } else {
+      this.router.navigate(['/register-comensal']);
+    }
   }
-
-  
 }

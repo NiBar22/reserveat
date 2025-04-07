@@ -29,7 +29,8 @@ export const routes: Routes = [
   {
     path: 'register-restaurante',
     loadComponent: () => import('./pages/register-restaurante/register-restaurante.page').then( m => m.RegisterRestaurantePage)
-  },  {
+  },
+  {
     path: 'select-filters',
     loadComponent: () => import('./pages/select-filters/select-filters.page').then( m => m.SelectFiltersPage)
   },
@@ -38,13 +39,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home-screen/home-screen.page').then( m => m.HomeScreenPage)
   },
   {
-    path: 'select-rest-photos',
-    loadComponent: () => import('./pages/select-rest-photos/select-rest-photos.page').then( m => m.SelectRestPhotosPage)
+    path: 'restaurant-uploads',
+    loadComponent: () => import('./pages/restaurant-uploads/restaurant-uploads.page').then( m => m.RestaurantUploadsPage)
   },
-
-
-
-
-
   
 ];

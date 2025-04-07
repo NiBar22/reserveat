@@ -1,0 +1,32 @@
+<ion-content>
+  <ion-button (click)="goBack()" color = "light" class="back-button">
+    <ion-icon name="arrow-back-outline" color = "dark"></ion-icon>
+  </ion-button>
+
+  <p>Genial, completa tu registro añadiendo imágenes de tu restaurante</p>
+
+  
+  <h2>Menú:</h2>
+  <ion-card (click)="uploadMenu()" class="upload-card">
+    <div class="upload-content">
+      <ion-icon name="document-attach-outline"></ion-icon>
+      <p *ngIf="menuFiles.length === 0">Añadir archivo PDF</p>
+      <p *ngIf="menuFiles.length > 0">{{ menuFiles.length }} archivo(s) añadido(s)</p>
+    </div>
+  </ion-card>
+
+  
+  <h2>Restaurante:</h2>
+  <ion-card (click)="uploadImages()" class="upload-card">
+    <div class="upload-content">
+      <ion-icon name="images-outline"></ion-icon>
+      <p *ngIf="restaurantImages.length === 0">Añadir imágenes</p>
+      <p *ngIf="restaurantImages.length > 0">{{ restaurantImages.length }} imagen(es) añadida(s)</p>
+    </div>
+  </ion-card>
+
+  
+  <ion-button color = "light" expand="full" [disabled]="!canRegister()" (click)="registerRestaurant()">
+    Registrarse
+  </ion-button>
+</ion-content>
