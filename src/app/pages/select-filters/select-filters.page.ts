@@ -7,13 +7,15 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
+import { UserService } from '../../services/user.service';
+
 
 @Component({
   selector: 'app-select-filters',
   templateUrl: './select-filters.page.html',
   styleUrls: ['./select-filters.page.scss'],
   standalone: true,
-  imports: [IonContent, IonSearchbar, IonButton, IonIcon, CommonModule, FormsModule, IonChip, IonHeader, IonToolbar, IonButtons]
+  imports: [CommonModule, IonContent, IonSearchbar, IonButton, IonIcon, CommonModule, FormsModule, IonChip, IonHeader, IonToolbar, IonButtons]
 })
 export class SelectFiltersPage {
   userType: string = 'comensal'; // Valor por defecto
@@ -28,7 +30,9 @@ export class SelectFiltersPage {
   selectedFilters: string[] = [];
   maxFilters: number = 6;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(public router: Router,
+  private route: ActivatedRoute,
+  private userService: UserService) {
     addIcons({ arrowBackOutline });
 
     // Detectar si el usuario es restaurante
@@ -61,18 +65,58 @@ export class SelectFiltersPage {
   }
 
   finishRegistration() {
-    console.log('Filtros seleccionados:', this.selectedFilters);
+  if (this.userType === 'restaurant') {
+    const restauranteConArchivos = JSON.parse(localStorage.getItem('restauranteConArchivos') || '{}');
 
-    if (this.userType === 'restaurant') {
-      this.router.navigate(['/restaurant-uploads'], { queryParams: { userType: 'restaurant' } });
-    } else {
-      this.router.navigate(['/home-screen']);
+    if (!restauranteConArchivos || Object.keys(restauranteConArchivos).length === 0) {
+      console.error('No se encontró información del restaurante en localStorage');
+      return;
     }
+
+    const restauranteFinal = {
+      ...restauranteConArchivos,
+      filtros: this.selectedFilters
+    };
+
+    this.userService.addRestaurante(restauranteFinal)
+      .then(() => {
+        localStorage.removeItem('restauranteData');
+        localStorage.removeItem('restauranteConArchivos');
+        this.router.navigate(['/home-screen']);
+      })
+      .catch(error => {
+        console.error('Error al guardar restaurante en Firestore:', error);
+      });
+
+  } else {
+    const comensalData = JSON.parse(localStorage.getItem('comensalData') || '{}');
+
+    if (!comensalData || Object.keys(comensalData).length === 0) {
+      console.error('No se encontró información del comensal en localStorage');
+      return;
+    }
+
+    const comensalFinal = {
+      ...comensalData,
+      filtros: this.selectedFilters
+    };
+
+    this.userService.addComensal(comensalFinal)
+      .then(() => {
+        localStorage.removeItem('comensalData');
+        this.router.navigate(['/home-screen']);
+      })
+      .catch(error => {
+        console.error('Error al guardar comensal en Firestore:', error);
+      });
   }
+}
+
+
 
   goBack() {
     if (this.userType === 'restaurant') {
-      this.router.navigate(['/register-restaurant']);
+      this.router.navigate(['/restaurant-uploads']);
     } else {
       this.router.navigate(['/register-comensal']);
     }

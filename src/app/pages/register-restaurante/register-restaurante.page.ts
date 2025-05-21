@@ -10,6 +10,8 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { addIcons } from 'ionicons';
 import { logoIonic, arrowBackOutline, imageOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../../services/user.service';
+
 
 @Component({
   selector: 'app-register-restaurante',
@@ -35,7 +37,7 @@ export class RegisterRestaurantePage {
   logo: string | null = null;
   errorMensaje: string = '';
 
-  constructor(public router: Router) {
+  constructor(public  router: Router, private userService: UserService) {
     addIcons({ arrowBackOutline, imageOutline, logoIonic });
   }
 
@@ -92,9 +94,28 @@ export class RegisterRestaurantePage {
       this.errorMensaje = 'El teléfono solo debe contener números';
       return;
     }
+    const nuevoRestaurante  = {
+    nombreRestaurante: this.nombreRestaurante,
+    nit: this.nit,
+    usuario: this.usuario,
+    propietarioNombre: this.propietarioNombre,
+    propietarioApellidos: this.propietarioApellidos,
+    direccion: this.direccion,
+    telefono: this.telefono,
+    password: this.password
+  };
+
+  this.userService.addRestaurante(nuevoRestaurante )
+    .then(() => {
+     localStorage.setItem('restauranteData', JSON.stringify(nuevoRestaurante));
+     this.router.navigate(['/restaurant-uploads']);
+    })
+    .catch((error) => {
+      console.error('Error al registrar restaurante:', error);
+    });
 
     console.log('Registro exitoso');
-    this.router.navigate(['/select-filters'], { queryParams: { userType: 'restaurant' } });
+    //this.router.navigate(['/select-filters'], { queryParams: { userType: 'restaurant' } });
 
   }
   

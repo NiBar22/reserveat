@@ -7,6 +7,7 @@ import { addIcons } from 'ionicons';
 import { restaurantOutline, bodyOutline} from 'ionicons/icons';
 
 @Component({
+  standalone: true,
   selector: 'app-register-selection',
   templateUrl: './register-selection.page.html',
   styleUrls: ['./register-selection.page.scss'],

@@ -8,7 +8,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { addIcons } from 'ionicons';
 import { logoIonic, arrowUndoOutline, imageOutline, arrowBackOutline, alertCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
-
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register-comensal',
@@ -31,7 +31,7 @@ export class RegisterComensalPage {
   errorMensaje: string = '';
   
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private userService: UserService) {
     addIcons({arrowBackOutline,imageOutline,alertCircleOutline,arrowUndoOutline,logoIonic});
   }
 
@@ -49,40 +49,37 @@ export class RegisterComensalPage {
     );
   }
   registrar() {
-    this.errorMensaje = '';
-    
-    // Verificación detallada de campos vacíos
-    const camposFaltantes = [];
-    if (!this.usuario.trim()) camposFaltantes.push('Usuario');
-    if (!this.nombres.trim()) camposFaltantes.push('Nombres');
-    if (!this.apellidos.trim()) camposFaltantes.push('Apellidos');
-    if (!this.direccion.trim()) camposFaltantes.push('Dirección');
-    if (!this.telefono.trim()) camposFaltantes.push('Teléfono');
-    if (!this.tipoDocumento) camposFaltantes.push('Tipo de Documento');
-    if (!this.numeroDocumento.trim()) camposFaltantes.push('Número de Documento');
-    if (!this.password.trim()) camposFaltantes.push('Contraseña');
-    if (!this.confirmPassword.trim()) camposFaltantes.push('Confirmar Contraseña');
-
-    if (camposFaltantes.length > 0) {
-      this.errorMensaje = `Faltan campos requeridos: ${camposFaltantes.join(', ')}`;
-      return;
-    }
-
-    if (this.password !== this.confirmPassword) {
-      this.errorMensaje = 'Las contraseñas no coinciden';
-      return;
-    }
-
-    // Validación adicional de teléfono 
-    if (!/^\d+$/.test(this.telefono)) {
-      this.errorMensaje = 'El teléfono solo debe contener números';
-      return;
-    }
-
-    console.log('Registro exitoso');
-    this.router.navigate(['/select-filters'], { queryParams: { userType: 'comensal' } });
-
+  if (this.password !== this.confirmPassword) {
+    this.errorMensaje = 'Las contraseñas no coinciden';
+    return;
   }
+
+  const nuevoComensal = {
+    nombres: this.nombres,
+    apellidos: this.apellidos,
+    direccion: this.direccion,
+    telefono: this.telefono,
+    tipoDocumento: this.tipoDocumento,
+    numeroDocumento: this.numeroDocumento,
+    usuario: this.usuario,
+    password: this.password,
+    tipo: 'comensal'
+  };
+
+  try {
+    // Guardar datos temporalmente
+    localStorage.setItem('comensalData', JSON.stringify(nuevoComensal));
+
+    // Navegar a la selección de filtros
+    this.router.navigate(['/select-filters'], {
+      queryParams: { userType: 'comensal' }
+    });
+  } catch (error) {
+    console.error('Error al preparar registro de comensal:', error);
+    this.errorMensaje = 'Ocurrió un error. Intenta de nuevo.';
+  }
+}
+
 
 
   async seleccionarFoto() {
