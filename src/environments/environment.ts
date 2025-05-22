@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  firebase: {  // 🔥 cambio clave: renombrar firebaseConfig -> firebase
+  firebase: {  
     apiKey: "AIzaSyB4VHJ_E9HopOspyZVAgXCiZGHAut3rboY",
     authDomain: "reserveat-ea343.firebaseapp.com",
     projectId: "reserveat-ea343",
-    storageBucket: "reserveat-ea343.appspot.com",
+    storageBucket: "reserveat-ea343.firebasestorage.app",
     messagingSenderId: "24007490194",
     appId: "1:24007490194:web:e30a503d8f6d8a35adc44b",
     measurementId: "G-B55E3KS64Y"
