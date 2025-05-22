@@ -64,11 +64,28 @@ export class RegisterComensalPage {
   }
 
  registrar() {
+
+  if (
+    !this.usuario.trim() ||
+    !this.nombres.trim() ||
+    !this.apellidos.trim() ||
+    !this.direccion.trim() ||
+    !this.telefono.trim() ||
+    !this.tipoDocumento ||
+    !this.numeroDocumento.trim() ||
+    !this.password.trim() ||
+    !this.confirmPassword.trim()
+  ) {
+    this.errorMensaje = 'Por favor, completa todos los campos.';
+    return;
+  }
   if (this.password !== this.confirmPassword) {
     this.errorMensaje = 'Las contraseñas no coinciden';
     return;
   }
 
+  this.errorMensaje = '';
+  
   const db = getFirestore();
   const comensalesRef = collection(db, 'comensales');
 
@@ -87,8 +104,13 @@ export class RegisterComensalPage {
     };
 
     try {
-      await addDoc(comensalesRef, nuevoComensal);
-      this.router.navigate(['/select-filters']);
+      const docRef = await addDoc(comensalesRef, nuevoComensal);
+localStorage.setItem('comensal', JSON.stringify({
+  ...nuevoComensal,
+  id: docRef.id
+}));
+this.router.navigate(['/select-filters']);
+
     } catch (error) {
       console.error('Error al registrar comensal:', error);
       this.errorMensaje = 'Error al registrar comensal. Intenta de nuevo.';

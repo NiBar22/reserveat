@@ -89,7 +89,8 @@ export class SelectFiltersPage {
       });
 
   } else {
-    const comensalData = JSON.parse(localStorage.getItem('comensalData') || '{}');
+    const comensalData = JSON.parse(localStorage.getItem('comensal') || '{}');
+
 
     if (!comensalData || Object.keys(comensalData).length === 0) {
       console.error('No se encontró información del comensal en localStorage');
