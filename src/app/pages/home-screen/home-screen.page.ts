@@ -31,12 +31,12 @@ export class HomeScreenPage implements OnInit {
   name: r.nombreRestaurante || 'Nombre no disponible'
 }));
 
-this.secondaryRestaurants = conImagen.slice(3, 6).map(r => ({
+this.secondaryRestaurants = conImagen.slice(3, 8).map(r => ({
   logoUrl: r.imagenes?.[0] || 'assets/default-image.jpg',
   name: r.nombreRestaurante || 'Nombre no disponible'
 }));
 
-this.verticalRestaurants = conImagen.slice(6).map(r => ({
+this.verticalRestaurants = conImagen.slice(8).map(r => ({
   logoUrl: r.imagenes?.[0] || 'assets/default-image.jpg',
   name: r.nombreRestaurante || 'Nombre no disponible'
 }));

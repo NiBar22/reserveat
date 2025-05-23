@@ -8,6 +8,8 @@ import {
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
 import { UserService } from '../../services/user.service';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+
 
 
 @Component({
@@ -29,10 +31,13 @@ export class SelectFiltersPage {
   filteredFilters: string[] = [...this.filters];
   selectedFilters: string[] = [];
   maxFilters: number = 6;
+  errorMensaje: string = '';
+
 
   constructor(public router: Router,
   private route: ActivatedRoute,
-  private userService: UserService) {
+  private userService: UserService,
+  private firestore: Firestore) {
     addIcons({ arrowBackOutline });
 
     // Detectar si el usuario es restaurante
@@ -64,54 +69,36 @@ export class SelectFiltersPage {
     return new Array(this.maxFilters - this.selectedFilters.length);
   }
 
-  finishRegistration() {
-  if (this.userType === 'restaurant') {
-    const restauranteConArchivos = JSON.parse(localStorage.getItem('restauranteConArchivos') || '{}');
+  async finishRegistration() {
+  try {
+    const datosBasicos = JSON.parse(localStorage.getItem('restauranteData') || '{}');
+    const datosArchivos = JSON.parse(localStorage.getItem('restauranteConArchivos') || '{}');
 
-    if (!restauranteConArchivos || Object.keys(restauranteConArchivos).length === 0) {
-      console.error('No se encontró información del restaurante en localStorage');
+    if (!datosBasicos || !datosArchivos || this.selectedFilters.length === 0) {
+      this.errorMensaje = 'Faltan datos para completar el registro.';
       return;
     }
 
     const restauranteFinal = {
-      ...restauranteConArchivos,
+      ...datosBasicos,
+      ...datosArchivos,
       filtros: this.selectedFilters
     };
 
-    this.userService.addRestaurante(restauranteFinal)
-      .then(() => {
-        localStorage.removeItem('restauranteData');
-        localStorage.removeItem('restauranteConArchivos');
-        this.router.navigate(['/home-screen']);
-      })
-      .catch(error => {
-        console.error('Error al guardar restaurante en Firestore:', error);
-      });
+    const colRef = collection(this.firestore, 'restaurantes');
+    await addDoc(colRef, restauranteFinal);
 
-  } else {
-    const comensalData = JSON.parse(localStorage.getItem('comensal') || '{}');
+    // Limpiar temporales
+    localStorage.removeItem('restauranteData');
+    localStorage.removeItem('restauranteConArchivos');
 
-
-    if (!comensalData || Object.keys(comensalData).length === 0) {
-      console.error('No se encontró información del comensal en localStorage');
-      return;
-    }
-
-    const comensalFinal = {
-      ...comensalData,
-      filtros: this.selectedFilters
-    };
-
-    this.userService.addComensal(comensalFinal)
-      .then(() => {
-        localStorage.removeItem('comensalData');
-        this.router.navigate(['/home-screen']);
-      })
-      .catch(error => {
-        console.error('Error al guardar comensal en Firestore:', error);
-      });
+    this.router.navigate(['/home-screen']);
+  } catch (error) {
+    console.error('Error al finalizar registro:', error);
+    this.errorMensaje = 'Ocurrió un error al guardar los datos. Intenta de nuevo.';
   }
 }
+
 
 
 

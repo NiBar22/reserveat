@@ -105,14 +105,13 @@ export class RegisterRestaurantePage {
     password: this.password
   };
 
-  this.userService.addRestaurante(nuevoRestaurante )
-    .then(() => {
-     localStorage.setItem('restauranteData', JSON.stringify(nuevoRestaurante));
-     this.router.navigate(['/restaurant-uploads']);
-    })
-    .catch((error) => {
-      console.error('Error al registrar restaurante:', error);
-    });
+  try {
+    localStorage.setItem('restauranteData', JSON.stringify(nuevoRestaurante));
+    this.router.navigate(['/restaurant-uploads']);
+  } catch (error) {
+    console.error('Error al guardar datos en localStorage:', error);
+    this.errorMensaje = 'Ocurrió un error al registrar el restaurante. Intenta nuevamente.';
+  }
 
     console.log('Registro exitoso');
     //this.router.navigate(['/select-filters'], { queryParams: { userType: 'restaurant' } });

@@ -1,52 +1,41 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title class="ion-text-center">
-      <img src="assets/logo.png" alt="Reserveat Logo" style="height: 40px;" />
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <img src="assets/logo.png" alt="Reserveat Logo" class="logo">
 
-<ion-content class="ion-padding">
+    <ion-searchbar placeholder="Busca tus antojos!"></ion-searchbar>
 
-  <!-- Barra de búsqueda -->
-  <ion-searchbar placeholder="Busca tus antojos!"></ion-searchbar>
+    <ion-segment value="todos" scrollable>
+      <ion-segment-button value="todos"><ion-icon name="filter"></ion-icon></ion-segment-button>
+      <ion-segment-button value="favoritos"><ion-icon name="star"></ion-icon></ion-segment-button>
+      <ion-segment-button value="recomendados"><ion-icon name="thumbs-up"></ion-icon></ion-segment-button>
+      <ion-segment-button value="mas"><ion-icon name="ellipsis-horizontal"></ion-icon></ion-segment-button>
+    </ion-segment>
 
-  <!-- Filtros -->
-  <ion-segment value="todos" scrollable>
-    <ion-segment-button value="todos"><ion-icon name="filter"></ion-icon></ion-segment-button>
-    <ion-segment-button value="favoritos"><ion-icon name="star"></ion-icon></ion-segment-button>
-    <ion-segment-button value="recomendados"><ion-icon name="thumbs-up"></ion-icon></ion-segment-button>
-    <ion-segment-button value="mas"><ion-icon name="ellipsis-horizontal"></ion-icon></ion-segment-button>
-  </ion-segment>
+    <div class="scroll-horizontal">
+      <ion-card *ngFor="let restaurant of featuredRestaurants" class="featured-card">
+        <img [src]="restaurant.logoUrl" />
+        <ion-card-header>
+          <ion-card-title>{{ restaurant.name }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </div>
 
-  <!-- Scroll horizontal principal -->
-  <div style="display: flex; overflow-x: auto; gap: 12px; padding: 12px 0;">
-    <ion-card *ngFor="let restaurant of featuredRestaurants" style="min-width: 200px; flex-shrink: 0;">
-      <img [src]="restaurant.logoUrl" />
-      <ion-card-header>
-        <ion-card-title>{{ restaurant.name }}</ion-card-title>
-      </ion-card-header>
-    </ion-card>
+    <div class="scroll-avatars">
+  <div *ngFor="let restaurant of secondaryRestaurants" class="avatar-rectangle">
+    <img [src]="restaurant.logoUrl" />
   </div>
+</div>
 
-  <!-- Segundo scroll horizontal más pequeño -->
-  <div style="display: flex; overflow-x: auto; gap: 12px; padding: 12px 0;">
-    <ion-avatar *ngFor="let restaurant of secondaryRestaurants" style="min-width: 70px;">
-      <img [src]="restaurant.logoUrl" />
-    </ion-avatar>
-  </div>
-
-  <!-- Cards verticales -->
-  <ion-card *ngFor="let restaurant of verticalRestaurants">
-    <ion-card-header>
-      <ion-card-title>{{ restaurant.name }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <img [src]="restaurant.logoUrl" />
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngIf="verticalRestaurants.length === 0">
-  <ion-card-content>No hay más restaurantes para mostrar.</ion-card-content>
+    <ion-card *ngFor="let restaurant of verticalRestaurants" class="vertical-card">
+  <img [src]="restaurant.logoUrl" class="card-image"/>
+  <ion-card-content>
+    <ion-card-title>{{ restaurant.name }}</ion-card-title>
+  </ion-card-content>
 </ion-card>
 
+
+    <ion-card *ngIf="verticalRestaurants.length === 0" class="vertical-card">
+      <ion-card-content>No hay más restaurantes para mostrar.</ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
