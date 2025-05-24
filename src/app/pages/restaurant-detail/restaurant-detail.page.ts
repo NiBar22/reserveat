@@ -19,7 +19,7 @@ import {
   templateUrl: './restaurant-detail.page.html',
   styleUrls: ['./restaurant-detail.page.scss'],
   standalone: true,
-    imports: [CommonModule,IonContent, IonIcon, IonButton, IonIcon, IonHeader, IonToolbar, IonButtons, IonCard, IonIcon, IonCardContent, IonTitle]
+    imports: [CommonModule,IonContent, IonIcon, IonButton, IonHeader, IonToolbar, IonButtons, IonCard, IonCardContent, IonTitle]
 })
 export class RestaurantDetailPage implements OnInit {
   restaurant: any = null;

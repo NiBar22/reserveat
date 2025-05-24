@@ -16,6 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+
 
 @Component({
   selector: 'app-reserva',
@@ -120,20 +122,42 @@ export class ReservaPage implements OnInit {
     if (this.comensales > 1) this.comensales--;
   }
 
-  confirmarReserva(): void {
+  async confirmarReserva(): Promise<void> {
   if (!this.fechaSeleccionada || !this.horaSeleccionada) {
     alert('Por favor selecciona una fecha y hora válidas antes de confirmar.');
     return;
   }
 
-  console.log('Reservando:', {
-    restauranteId: this.restauranteId,
-    fecha: this.fechaSeleccionada,
-    hora: this.horaSeleccionada,
-    comensales: this.comensales
-  });
+  const usuarioActivo = localStorage.getItem('usuarioActivo');
+  if (!usuarioActivo) {
+    alert('No se ha encontrado un usuario activo. Inicia sesión de nuevo.');
+    this.router.navigate(['/login']);
+    return;
+  }
 
-  // TODO: Lógica para guardar en Firebase
+  try {
+    const db = getFirestore();
+
+    await addDoc(collection(db, 'reservas'), {
+      usuario: usuarioActivo,
+      restauranteId: this.restauranteId,
+      restauranteNombre: this.restauranteNombre,
+      fecha: this.fechaSeleccionada,
+      hora: this.horaSeleccionada,
+      comensales: this.comensales,
+      estado: 'activa',
+      asistio: null,
+      calificado: false,
+      timestamp: new Date()
+    });
+
+    alert('¡Reserva confirmada con éxito!');
+    this.router.navigate(['/reserva-confirmada']); // la pantalla que mostrarás después
+  } catch (error) {
+    console.error('Error al guardar la reserva:', error);
+    alert('Hubo un error al confirmar tu reserva. Intenta nuevamente.');
+  }
 }
+
 
 }
