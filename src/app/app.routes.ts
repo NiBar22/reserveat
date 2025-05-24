@@ -45,6 +45,14 @@ export const routes: Routes = [
     path: 'register-horarios',
     loadComponent: () => import('./pages/register-horarios/register-horarios.page').then( m => m.RegisterHorariosPage)
   },
+  {
+    path: 'restaurant-detail',
+    loadComponent: () => import('./pages/restaurant-detail/restaurant-detail.page').then( m => m.RestaurantDetailPage)
+  },
+  {
+    path: 'reserva',
+    loadComponent: () => import('./pages/reserva/reserva.page').then( m => m.ReservaPage)
+  },
 
   
 ];

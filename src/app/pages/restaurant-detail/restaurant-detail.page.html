@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true">
+  <!-- BOTÓN DE REGRESO -->
+  <ion-button (click)="goBack()" color="light" class="back-button">
+    <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+  </ion-button>
+
+  <div class="container">
+
+    <!-- LOGO -->
+    <div class="logo-container" *ngIf="restaurant?.logoUrl">
+      <img [src]="restaurant.logoUrl" alt="Logo" class="restaurant-logo" />
+    </div>
+
+    <!-- TÍTULO -->
+    <h2>{{ restaurant?.nombreRestaurante }}</h2>
+
+    <!-- DESCRIPCIÓN -->
+    <p class="descripcion">
+      {{ restaurant?.descripcionRestaurante || 'Este restaurante aún no ha escrito una descripción.' }}
+    </p>
+
+    <!-- MAPA + RESEÑAS -->
+    <ion-card>
+      <ion-card-content class="map-review">
+        <div class="mapa">
+          <p class="direccion">{{ restaurant?.direccion }}</p>
+          <!-- Aquí irá un mapa real luego -->
+        </div>
+        <div class="reseñas">
+          <h4>Reseñas recientes</h4>
+          <p><i>En desarrollo...</i></p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- CARRUSEL DE IMÁGENES -->
+    <div class="scroll-horizontal">
+      <div *ngFor="let img of restaurant?.imagenes" class="imagen-galeria">
+        <img [src]="img" alt="Foto del restaurante" />
+      </div>
+    </div>
+
+    <!-- BOTÓN RESERVAR -->
+    <ion-button expand="full" color="dark" (click)="reservar()">
+      Reservar
+    </ion-button>
+
+  </div>
+</ion-content>
