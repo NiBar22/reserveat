@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>register-horarios</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Horarios y Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register-horarios</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="container">
+    <h2>Configura tus horarios de atención</h2>
+
+    <ion-card *ngFor="let dia of diasSemana">
+      <ion-card-header>
+        <ion-card-title class="capitalize">{{ dia }}</ion-card-title>
+        <ion-toggle [(ngModel)]="horarios[dia].abierto">Abierto</ion-toggle>
+      </ion-card-header>
+      <ion-card-content *ngIf="horarios[dia].abierto">
+        <ion-item>
+          <ion-label position="stacked">Desde</ion-label>
+          <ion-input type="time" [(ngModel)]="horarios[dia].desde"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Hasta</ion-label>
+          <ion-input type="time" [(ngModel)]="horarios[dia].hasta"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Máx. reservas por hora</ion-label>
+          <ion-input type="number" [(ngModel)]="horarios[dia].reservasPorHora"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <h2>Configuración general</h2>
+
+    <ion-item>
+      <ion-label position="stacked">Duración por reserva (minutos)</ion-label>
+      <ion-input type="number" [(ngModel)]="bloqueTiempoMin"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Máximo personas por reserva</ion-label>
+      <ion-input type="number" [(ngModel)]="capacidadPorReserva"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" color="light" (click)="guardarHorarios()">
+      Continuar
+    </ion-button>
+  </div>
 </ion-content>

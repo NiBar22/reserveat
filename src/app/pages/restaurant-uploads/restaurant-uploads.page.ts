@@ -69,6 +69,12 @@ export class RestaurantUploadsPage {
   async registerRestaurant() {
   try {
     const datosRestaurante = JSON.parse(localStorage.getItem('restauranteData') || '{}');
+
+    if (!datosRestaurante || !datosRestaurante.usuario) {
+  console.error('❌ Datos incompletos del restaurante. Regresando...');
+  this.router.navigate(['/register-restaurante']);
+  return;
+}
     
     // 1. Subir archivo del menú
     const menuURL = this.menuFiles.length > 0

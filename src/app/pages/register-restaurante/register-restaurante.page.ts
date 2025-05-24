@@ -111,7 +111,7 @@ export class RegisterRestaurantePage {
 
   try {
     localStorage.setItem('restauranteData', JSON.stringify(nuevoRestaurante));
-    this.router.navigate(['/restaurant-uploads']);
+    this.router.navigate(['/register-horarios']);
   } catch (error) {
     console.error('Error al guardar datos en localStorage:', error);
     this.errorMensaje = 'Ocurrió un error al registrar el restaurante. Intenta nuevamente.';
