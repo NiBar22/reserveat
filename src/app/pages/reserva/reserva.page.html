@@ -1,13 +1,57 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reserva</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reserva</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- BOTÓN DE REGRESO (mismo estilo que detail) -->
+  <ion-button (click)="goBack()" color="light" class="back-button">
+    <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+  </ion-button>
+
+  <div class="container">
+
+    <!-- CARD CON LOGO Y NOMBRE -->
+    <ion-card class="restaurant-banner">
+  <img [src]="restauranteLogo" class="logo-full" />
+</ion-card>
+
+
+<h2 class="restaurant-title">{{ restauranteNombre }}</h2>
+
+
+    <!-- CALENDARIO -->
+    <ion-item>
+      <ion-label position="stacked">Selecciona la fecha</ion-label>
+      <ion-datetime
+        presentation="date"
+        [(ngModel)]="fechaSeleccionada"
+        [min]="today"
+        (ionChange)="onFechaSeleccionada($event)">
+      </ion-datetime>
+      <ion-text color="danger" *ngIf="fechaSeleccionada && horasDisponibles.length === 0">
+  Este día no está disponible para reservas.
+</ion-text>
+    </ion-item>
+
+    <!-- COMENSALES -->
+    <ion-item>
+      <ion-label>Comensales</ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="disminuir()">-</ion-button>
+        <span style="padding: 0 10px;">{{ comensales }}</span>
+        <ion-button (click)="aumentar()">+</ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <!-- SELECCIÓN DE HORA -->
+    <ion-item>
+      <ion-label position="stacked">Hora</ion-label>
+      <ion-select [(ngModel)]="horaSeleccionada" placeholder="Selecciona una hora">
+        <ion-select-option *ngFor="let hora of horasDisponibles" [value]="hora">
+          {{ hora }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- CONFIRMAR -->
+    <ion-button expand="full" color="dark" (click)="confirmarReserva()">
+      Confirmar reserva
+    </ion-button>
+  </div>
 </ion-content>

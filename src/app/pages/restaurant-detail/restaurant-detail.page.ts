@@ -48,11 +48,13 @@ export class RestaurantDetailPage implements OnInit {
     this.router.navigate(['/home-screen']);
   }
 
-  reservar() {
-    // Redirigir a la pantalla de reservas (a crear)
-    this.router.navigate(['/reservar'], {
-      queryParams: {
-        restaurantId: this.restaurant?.usuario // o cualquier otro identificador
+  reservar(): void {
+    this.router.navigate(['/reserva'], {
+      state: {
+        id: this.restaurant.id,
+        nombre: this.restaurant.nombreRestaurante,
+        logoUrl: this.restaurant.logoUrl,
+        horarios: this.restaurant.horarios
       }
     });
   }
