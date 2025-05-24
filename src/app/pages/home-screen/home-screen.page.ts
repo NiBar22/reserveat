@@ -27,16 +27,16 @@ export class HomeScreenPage implements OnInit {
     const conImagen = restaurantes.filter(r => r.imagenes?.length > 0);
 
     this.featuredRestaurants = conImagen.slice(0, 3).map(r => ({
+  logoUrl: r.logoUrl || r.imagenes?.[0] || 'assets/default-image.jpg',
+  name: r.nombreRestaurante || 'Nombre no disponible'
+}));
+
+this.secondaryRestaurants = conImagen.slice(3, 9).map(r => ({
   logoUrl: r.imagenes?.[0] || 'assets/default-image.jpg',
   name: r.nombreRestaurante || 'Nombre no disponible'
 }));
 
-this.secondaryRestaurants = conImagen.slice(3, 8).map(r => ({
-  logoUrl: r.imagenes?.[0] || 'assets/default-image.jpg',
-  name: r.nombreRestaurante || 'Nombre no disponible'
-}));
-
-this.verticalRestaurants = conImagen.slice(8).map(r => ({
+this.verticalRestaurants = conImagen.slice(9).map(r => ({
   logoUrl: r.imagenes?.[0] || 'assets/default-image.jpg',
   name: r.nombreRestaurante || 'Nombre no disponible'
 }));

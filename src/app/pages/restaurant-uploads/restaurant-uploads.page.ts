@@ -8,6 +8,9 @@ import { arrowBackOutline, imagesOutline, documentAttachOutline } from 'ionicons
 import { FileUploadService } from '../../services/file-upload.service';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
+
 
 @Component({
   standalone: true,
@@ -20,6 +23,8 @@ import { CommonModule } from '@angular/common';
 export class RestaurantUploadsPage {
   menuFiles: File[] = [];
   restaurantImages: File[] = [];
+  storage = getStorage();
+
 
   constructor(public fileUploadService: FileUploadService,
     private userService: UserService,
@@ -64,7 +69,7 @@ export class RestaurantUploadsPage {
   async registerRestaurant() {
   try {
     const datosRestaurante = JSON.parse(localStorage.getItem('restauranteData') || '{}');
-
+    
     // 1. Subir archivo del menú
     const menuURL = this.menuFiles.length > 0
       ? await this.fileUploadService.uploadFile(`menus/${datosRestaurante.usuario}_${this.menuFiles[0].name}`, this.menuFiles[0])
@@ -75,12 +80,35 @@ export class RestaurantUploadsPage {
       ? await this.fileUploadService.uploadMultiple(`restaurantes/${datosRestaurante.usuario}`, this.restaurantImages)
       : [];
 
+
+      let logoUrl = '';
+      if (datosRestaurante.fotoLogo) {
+  try {
+    const response = await fetch(datosRestaurante.fotoLogo);
+    const blob = await response.blob();
+
+    const logoRef = ref(this.storage, `logos/${datosRestaurante.usuario}_${Date.now()}.jpg`);
+    const snapshot = await uploadBytes(logoRef, blob);
+    logoUrl = await getDownloadURL(snapshot.ref);
+    delete datosRestaurante.fotoLogo;
+
+  } catch (error) {
+    console.error('Error al subir el logo:', error);
+  }
+}
+
+
+
+
     // 3. Combinar todo
     const restauranteConArchivos = {
-      ...datosRestaurante,
-      menuURL, // ✅ definida arriba
-      imagenes: imageURLs // ✅ definida arriba
-    };
+  ...datosRestaurante,
+  menuURL,
+  imagenes: imageURLs,
+  logoUrl
+};
+// ya limpiaste fotoLogo antes, no vuelve a aparecer
+
 
     // 4. Guardar en localStorage
     localStorage.setItem('restauranteConArchivos', JSON.stringify(restauranteConArchivos));

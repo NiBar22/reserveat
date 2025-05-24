@@ -18,12 +18,14 @@
         <ion-grid>
           <ion-row class="center-content">
             
-            <ion-col size="4" class="logo-container">
-              <div class="profile-picture" (click)="seleccionarLogo()">
-                <img *ngIf="logo" [src]="logo" alt="Logo del restaurante">
-                <ion-icon *ngIf="!logo" name="image-outline"></ion-icon>
-              </div>
-            </ion-col>
+            <div class="profile-picture" (click)="fileInput.click()">
+  <img *ngIf="fotoLogo; else defaultIcon" [src]="fotoLogo" alt="Logo del restaurante">
+  <ng-template #defaultIcon>
+    <ion-icon name="image-outline"></ion-icon>
+  </ng-template>
+</div>
+<input type="file" accept="image/*" hidden #fileInput (change)="onLogoSelected($event)">
+
 
             
             <ion-col size="8">

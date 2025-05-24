@@ -84,6 +84,8 @@ export class SelectFiltersPage {
       ...datosArchivos,
       filtros: this.selectedFilters
     };
+    delete restauranteFinal.fotoLogo;
+
 
     const colRef = collection(this.firestore, 'restaurantes');
     await addDoc(colRef, restauranteFinal);

@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 
+
 @Component({
   selector: 'app-register-restaurante',
   templateUrl: './register-restaurante.page.html',
@@ -34,8 +35,10 @@ export class RegisterRestaurantePage {
   usuario: string = '';
   password: string = '';
   confirmPassword: string = '';
-  logo: string | null = null;
   errorMensaje: string = '';
+  fotoLogo: string | null = null;
+  archivoLogo: File | null = null;
+
 
   constructor(public  router: Router, private userService: UserService) {
     addIcons({ arrowBackOutline, imageOutline, logoIonic });
@@ -61,7 +64,7 @@ export class RegisterRestaurantePage {
       !this.telefono.trim() &&
       !this.password.trim() &&
       !this.confirmPassword.trim() &&
-      !this.logo?.trim()
+      !this.fotoLogo?.trim()
     );
   }
 
@@ -78,7 +81,7 @@ export class RegisterRestaurantePage {
     if (!this.telefono.trim()) camposFaltantes.push('Teléfono');
     if (!this.password.trim()) camposFaltantes.push('Contraseña');
     if (!this.confirmPassword.trim()) camposFaltantes.push('Confirmar Contraseña');
-    if (!this.logo?.trim()) camposFaltantes.push('Logo');
+    if (!this.fotoLogo?.trim()) camposFaltantes.push('Logo');
 
     if (camposFaltantes.length > 0) {
       this.errorMensaje = `Faltan campos requeridos: ${camposFaltantes.join(', ')}`;
@@ -102,7 +105,8 @@ export class RegisterRestaurantePage {
     propietarioApellidos: this.propietarioApellidos,
     direccion: this.direccion,
     telefono: this.telefono,
-    password: this.password
+    password: this.password,
+    fotoLogo: this.fotoLogo 
   };
 
   try {
@@ -119,16 +123,19 @@ export class RegisterRestaurantePage {
   }
   
 
-  async seleccionarLogo() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Photos
-    });
+  onLogoSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
 
-    if (image.dataUrl) {
-      this.logo = image.dataUrl;
-    }
+  if (file) {
+    this.archivoLogo = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.fotoLogo = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
+}
+
 }

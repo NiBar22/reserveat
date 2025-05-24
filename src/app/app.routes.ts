@@ -41,6 +41,10 @@ export const routes: Routes = [
   {
     path: 'restaurant-uploads',
     loadComponent: () => import('./pages/restaurant-uploads/restaurant-uploads.page').then( m => m.RestaurantUploadsPage)
+  },  {
+    path: 'register-horarios',
+    loadComponent: () => import('./pages/register-horarios/register-horarios.page').then( m => m.RegisterHorariosPage)
   },
+
   
 ];
