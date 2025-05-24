@@ -57,8 +57,8 @@ export class ReservaPage implements OnInit {
       this.restauranteId = navState['id'];
       this.restauranteNombre = navState['nombre'];
       this.restauranteLogo = navState['logoUrl'];
-      this.horarios = navState['horarios'] || {};
-    }
+      this.horarios = navState['horarios'] || {};   
+     }
 
     this.extraerDiasDisponibles();
   }
@@ -69,26 +69,42 @@ export class ReservaPage implements OnInit {
     );
   }
 
-  onFechaSeleccionada(event: any): void {
-  this.fechaSeleccionada = event.detail.value;
+  onFechaSeleccionada(event: any) {
+  const fecha = new Date(event.detail.value);
+  const diaSemana = fecha.toLocaleDateString('es-CO', { weekday: 'long' }).toLowerCase(); // ej: "lunes"
 
-  const date = new Date(this.fechaSeleccionada);
-  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-  const diaNombre = dias[date.getDay()];
-  const configDia = this.horarios[diaNombre];
+  const horarioDelDia = this.horarios?.[diaSemana];
 
-  if (configDia?.abierto) {
-    const desde = configDia.desde;
-    const hasta = configDia.hasta;
-    const paso = this.horarios?.bloqueTiempoMin || 60;
-
-    this.horasDisponibles = this.generarIntervalosHoras(desde, hasta, paso);
-  } else {
+  if (!horarioDelDia || !horarioDelDia.abierto) {
     this.horasDisponibles = [];
-    this.fechaSeleccionada = '';
-    alert(`El restaurante no recibe reservas los días ${diaNombre}. Por favor selecciona otra fecha.`);
+    return;
   }
+
+  const desde = horarioDelDia.desde; // ej: "12:00"
+  const hasta = horarioDelDia.hasta; // ej: "15:00"
+  const bloque = 60 / (horarioDelDia.reservasPorHora || 1); // duración entre reservas
+
+  const [horaDesde, minutoDesde] = desde.split(':').map(Number);
+  const [horaHasta, minutoHasta] = hasta.split(':').map(Number);
+
+  const inicio = new Date(fecha);
+  inicio.setHours(horaDesde, minutoDesde, 0, 0);
+
+  const fin = new Date(fecha);
+  fin.setHours(horaHasta, minutoHasta, 0, 0);
+
+  const bloques: string[] = [];
+  const actual = new Date(inicio);
+
+  while (actual < fin) {
+    const hora = actual.toTimeString().substring(0, 5);
+    bloques.push(hora);
+    actual.setMinutes(actual.getMinutes() + bloque);
+  }
+
+  this.horasDisponibles = bloques;
 }
+
 
 
   generarIntervalosHoras(desde: string, hasta: string, paso: number): string[] {
