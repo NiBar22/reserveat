@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline } from 'ionicons/icons';
+import { arrowBackOutline, star } from 'ionicons/icons';
 
 @Component({
   selector: 'app-mis-reservas',
@@ -45,7 +45,7 @@ export class MisReservasPage implements OnInit {
   public constructor(
     public router: Router,
     private firestore: Firestore
-  ) {addIcons({arrowBackOutline});}
+  ) {addIcons({arrowBackOutline,star});}
 
   public ngOnInit() {
   const auth = getAuth();
@@ -92,7 +92,7 @@ console.log('Reservas filtradas:', this.reservasFiltradas);
 
 
   public calificarReserva(reserva: any): void {
-    this.router.navigate(['/form-calificar'], { state: { reserva } });
+    this.router.navigate(['/review'], { state: { reserva } });
   }
 
   public goBack(): void {

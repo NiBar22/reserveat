@@ -61,6 +61,10 @@ export const routes: Routes = [
     path: 'mis-reservas',
     loadComponent: () => import('./pages/mis-reservas/mis-reservas.page').then( m => m.MisReservasPage)
   },
+  {
+    path: 'review',
+    loadComponent: () => import('./pages/review/review.page').then( m => m.ReviewPage)
+  },
 
   
 ];

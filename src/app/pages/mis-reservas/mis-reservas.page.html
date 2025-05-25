@@ -34,22 +34,24 @@
           <p>{{ reserva.fecha }}</p>
 
           <!-- Cumplidas -->
-          <ng-container *ngIf="reserva.estado === 'cumplida'">
-            <ng-container *ngIf="reserva.calificacion !== null; else calificar">
-              <div class="calificacion">
-                <ion-icon
-                  *ngFor="let i of [1, 2, 3, 4, 5]"
-                  name="star"
-                  [color]="i <= reserva.calificacion ? 'warning' : 'medium'">
-                </ion-icon>
-              </div>
-            </ng-container>
-            <ng-template #calificar>
-              <ion-button size="small" fill="clear" color="dark" (click)="calificarReserva(reserva)">
-                Calificar
-              </ion-button>
-            </ng-template>
-          </ng-container>
+          <!-- Cumplidas -->
+<ng-container *ngIf="reserva.estado === 'cumplida'">
+  <ng-container *ngIf="reserva.calificado === true; else calificar">
+  <div class="calificacion">
+    <ion-icon
+      *ngFor="let i of [1, 2, 3, 4, 5]"
+      name="star"
+      [color]="i <= reserva.promedio ? 'warning' : 'medium'">
+    </ion-icon>
+  </div>
+</ng-container>
+  <ng-template #calificar>
+    <ion-button size="small" fill="clear" color="dark" (click)="calificarReserva(reserva)">
+      Calificar
+    </ion-button>
+  </ng-template>
+</ng-container>
+
         </div>
       </ion-card-content>
     </ion-card>
