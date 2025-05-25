@@ -26,6 +26,7 @@ export class ReviewPage implements OnInit {
   public menu: number = 0;
   public espera: number = 0;
   public comentario: string = '';
+  
 
   constructor(public router: Router,
     private route: ActivatedRoute,
@@ -57,6 +58,7 @@ export class ReviewPage implements OnInit {
   restauranteNombre: this.reserva.restauranteNombre,
   restauranteLogo: this.reserva.restauranteLogo,
   comensalId: this.reserva.usuario,
+  usuarioFoto: this.reserva.usuarioFoto || '',
   nombreComensal: this.reserva.usuario,
   comentario: this.comentario,
   menu: this.menu,

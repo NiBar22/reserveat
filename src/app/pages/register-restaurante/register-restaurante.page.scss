@@ -7,15 +7,24 @@ ion-content {
   }
 
   .back-button {
-    
-    color: white; 
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  top: 20px;
+  left: 16px;
+  z-index: 1000;
+  background: #000;
+  color: white;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 24px;
   }
+}
+
   
   .container {
     width: 90%;
@@ -26,7 +35,7 @@ ion-content {
     text-align: center;
     justify-content: center;
     margin: auto;
-    padding-top: 20px;
+    padding-top: 70px;
     background-color: #E9EDC9;
   }
   h2, h3 {

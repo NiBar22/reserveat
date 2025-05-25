@@ -138,4 +138,9 @@ export class RegisterRestaurantePage {
   }
 }
 
+
+goBack() {
+  this.router.navigate(['/register-selection']);
+}
+
 }

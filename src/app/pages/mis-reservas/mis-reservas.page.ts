@@ -47,39 +47,38 @@ export class MisReservasPage implements OnInit {
     private firestore: Firestore
   ) {addIcons({arrowBackOutline,star,starOutline,homeOutline,calendarOutline});}
 
-  public ngOnInit() {
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user: User | null) => {
-    if (user) {
-      this.cargarReservas();
-    } else {
-      console.error("No hay usuario autenticado.");
-    }
-  });
-}
-
-private cargarReservas(): void {
-  const reservasRef = collection(this.firestore, 'reservas');
+ public ngOnInit() {
   const usuarioActivo = localStorage.getItem('usuarioActivo');
-  const q = query(reservasRef, where('usuario', '==', usuarioActivo));
-
-
-  collectionData(q, { idField: 'id' })
-    .pipe(
-      map(reservas => reservas.sort((a: any, b: any) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()))
-    )
-    .subscribe({
-      next: (reservas) => {
-        console.log('Reservas cargadas:', reservas);
-        this.allReservas = reservas;
-        this.filtrarReservas();
-      },
-      error: (error) => {
-        console.error("Error al cargar las reservas desde Firestore:", error);
-      }
-    });
+  if (usuarioActivo) {
+    this.cargarReservas(usuarioActivo);
+  } else {
+    console.error("No se encontró usuario activo en localStorage");
+    this.router.navigate(['/login']);
+  }
 }
+
+
+  private cargarReservas(usuarioActivo: string): void {
+    
+    const reservasRef = collection(this.firestore, 'reservas');
+    const q = query(reservasRef, where('usuario', '==', usuarioActivo));
+
+
+    collectionData(q, { idField: 'id' })
+      .pipe(
+        map(reservas => reservas.sort((a: any, b: any) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()))
+      )
+      .subscribe({
+        next: (reservas) => {
+          console.log('Reservas cargadas:', reservas);
+          this.allReservas = reservas;
+          this.filtrarReservas();
+        },
+        error: (error) => {
+          console.error("Error al cargar las reservas desde Firestore:", error);
+        }
+      });
+  }
 
   public filtrarReservas(): void {
     console.log('Filtrando por estado:', this.estadoActual);

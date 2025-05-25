@@ -70,6 +70,29 @@ export class SelectFiltersPage {
   }
 
   async finishRegistration() {
+if (this.userType === 'comensal') {
+  const comensalData = JSON.parse(localStorage.getItem('comensalData') || '{}');
+
+  if (!comensalData || this.selectedFilters.length === 0) {
+    this.errorMensaje = 'Faltan datos para completar el registro.';
+    return;
+  }
+
+  const comensalFinal = {
+    ...comensalData,
+    filtros: this.selectedFilters
+  };
+
+  const colRef = collection(this.firestore, 'comensales');
+  await addDoc(colRef, comensalFinal);
+
+  localStorage.setItem('usuarioActivo', comensalFinal.usuario);
+  localStorage.removeItem('comensalData');
+  this.router.navigate(['/home-screen']);
+  return;
+}
+
+
   try {
     const datosBasicos = JSON.parse(localStorage.getItem('restauranteData') || '{}');
     const datosArchivos = JSON.parse(localStorage.getItem('restauranteConArchivos') || '{}');

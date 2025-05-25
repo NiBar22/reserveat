@@ -105,10 +105,14 @@ export class RegisterComensalPage {
 
     try {
       const docRef = await addDoc(comensalesRef, nuevoComensal);
-localStorage.setItem('comensal', JSON.stringify({
+const comensalFinal = {
   ...nuevoComensal,
   id: docRef.id
-}));
+};
+
+localStorage.setItem('comensalData', JSON.stringify(comensalFinal));
+this.router.navigate(['/select-filters']);
+
 this.router.navigate(['/select-filters']);
 
     } catch (error) {
@@ -150,8 +154,9 @@ this.router.navigate(['/select-filters']);
   }
 }
 
-  async seleccionarFoto() {
-    // Este método solo sirve si se usa Capacitor Camera. Puede omitirse si no se usa.
-    // En este flujo ya usamos input type="file"
-  }
+
+  public goBack(): void {
+  this.router.navigate(['/register-selection']);
+}
+
 }

@@ -1,14 +1,12 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button class="back-button" color="dark" (click)="router.navigate(['/register-selection'])">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="false">
+
+  <!-- BOTÓN DE REGRESO -->
+<ion-button (click)="goBack()" color="light" class="back-button">
+  <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+</ion-button>
+
   <div class="container">
     <h2>Completa los siguientes campos:</h2>
 

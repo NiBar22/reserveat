@@ -41,8 +41,8 @@ h2 {
   font-weight: bold;
   padding: 0 8px;
   margin-top: 0;
+  color: #222; // Tono oscuro legible
 }
-
 .descripcion {
   text-align: left;
   font-size: 0.95rem;
@@ -100,6 +100,7 @@ ion-card {
 ion-button {
   margin-top: auto;
   font-weight: 500;
+  margin-bottom: 90px;
 }
 
 .menu-inferior {
@@ -123,3 +124,45 @@ ion-button {
 }
 
 
+.reseñas {
+  flex: 1;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mini-review {
+  --background: #f8f8f8;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: none;
+}
+
+.review-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stars {
+  display: flex;
+}
+
+.comentario {
+  font-size: 0.85rem;
+  color: #444;
+}

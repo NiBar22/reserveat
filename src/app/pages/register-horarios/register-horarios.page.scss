@@ -12,7 +12,7 @@ ion-toolbar {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 16px;
+  padding-top: 80px;
   background-color: #E9EDC9;
 }
 
@@ -62,4 +62,30 @@ ion-input {
 
 ion-button {
   margin-top: 20px;
+}
+
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 16px;
+  z-index: 1000;
+  background: #000;
+  color: white;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+ion-toggle {
+  --handle-background: #cccccc;               // círculo cuando está apagado
+  --handle-background-checked: #666666;       // círculo cuando está encendido
+  --background: #d4d4d4;                      // fondo (track) cuando está apagado
+  --toggle-background-checked: #aaaaaa;       // ✅ fondo (track) detrás del círculo al estar encendido
+  margin-left: 10px;
 }

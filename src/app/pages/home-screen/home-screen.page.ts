@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { arrowBackOutline, star, starOutline, homeOutline, calendarOutline } from 'ionicons/icons';
+import { arrowBackOutline, star, starOutline, homeOutline, calendarOutline, filter,thumbsUp, ellipsisHorizontal } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
 @Component({
@@ -21,7 +21,7 @@ export class HomeScreenPage implements OnInit {
   secondaryRestaurants: any[] = [];
   verticalRestaurants: any[] = [];
 
-  constructor(private firestore: Firestore, public router: Router) {addIcons({arrowBackOutline,star,starOutline,homeOutline,calendarOutline});}
+  constructor(private firestore: Firestore, public router: Router) {addIcons({arrowBackOutline,star,starOutline,homeOutline,calendarOutline, thumbsUp, ellipsisHorizontal,filter});}
 
   ngOnInit() {
   const restaurantesRef = collection(this.firestore, 'restaurantes');

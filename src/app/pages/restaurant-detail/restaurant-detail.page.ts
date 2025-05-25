@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, starOutline, homeOutline, calendarOutline } from 'ionicons/icons';
+import { arrowBackOutline, starOutline, homeOutline, calendarOutline, star } from 'ionicons/icons';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -12,6 +12,10 @@ import {
   IonCard,
   IonCardContent
  } from '@ionic/angular/standalone';
+ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Firestore, collection, query, where, orderBy, limit, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
  
 
 @Component({
@@ -19,21 +23,36 @@ import {
   templateUrl: './restaurant-detail.page.html',
   styleUrls: ['./restaurant-detail.page.scss'],
   standalone: true,
-    imports: [CommonModule,IonContent, IonIcon, IonButton, IonHeader, IonToolbar, IonButtons, IonCard, IonCardContent, IonTitle]
+    imports: [CommonModule,IonContent, IonIcon, IonButton, IonHeader, IonToolbar, IonButtons, IonCard, IonCardContent, IonTitle, ]
 })
 export class RestaurantDetailPage implements OnInit {
   restaurant: any = null;
+  direccionMapUrl: SafeResourceUrl = '';
+  reviews$: Observable<any[]> | undefined;
+
+
 
   constructor(
     public router: Router,
-    private route: ActivatedRoute
-  ) {addIcons({arrowBackOutline,starOutline,homeOutline,calendarOutline});}
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private firestore: Firestore
+  ) {addIcons({arrowBackOutline,star,starOutline,homeOutline,calendarOutline});}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       if (params['data']) {
         try {
           this.restaurant = JSON.parse(params['data']);
+if (this.restaurant?.direccion) {
+  const url = 'https://www.google.com/maps?q=' + encodeURIComponent(this.restaurant.direccion) + '&output=embed';
+this.direccionMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+}
+
+this.obtenerReviewsRecientes(this.restaurant.id);
+
+
         } catch (e) {
           console.error('Error parsing restaurant data:', e);
           this.router.navigate(['/home-screen']);
@@ -72,5 +91,16 @@ public irAHome(): void {
 public irAMisReservas(): void {
   this.router.navigate(['/mis-reservas']);
 }
+obtenerReviewsRecientes(idRestaurante: string) {
+  const reviewsRef = collection(this.firestore, 'reviews');
+  const q = query(
+    reviewsRef,
+    where('restauranteId', '==', idRestaurante),
+    orderBy('fecha', 'desc'),
+    limit(3)
+  );
+  this.reviews$ = collectionData(q, { idField: 'id' });
+}
+
 
 }

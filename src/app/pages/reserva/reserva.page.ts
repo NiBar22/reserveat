@@ -17,6 +17,8 @@ import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getDoc, doc } from 'firebase/firestore';
 
 
 @Component({
@@ -145,7 +147,7 @@ export class ReservaPage implements OnInit {
     if (this.comensales > 1) this.comensales--;
   }
 
-  async confirmarReserva(): Promise<void> {
+ async confirmarReserva(): Promise<void> {
   if (!this.fechaSeleccionada || !this.horaSeleccionada) {
     alert('Por favor selecciona una fecha y hora válidas antes de confirmar.');
     return;
@@ -158,11 +160,24 @@ export class ReservaPage implements OnInit {
     return;
   }
 
-  try {
-    const db = getFirestore();
+  const db = getFirestore();
+  const docRef = doc(db, 'comensales', usuarioActivo);
+  let usuarioFoto = '';
 
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      usuarioFoto = docSnap.data()['fotoURL'] || '';
+
+        }
+  } catch (error) {
+    console.warn('No se pudo obtener la foto del usuario desde Firestore:', error);
+  }
+
+  try {
     await addDoc(collection(db, 'reservas'), {
       usuario: usuarioActivo,
+      usuarioFoto: usuarioFoto, // ✅ correctamente cargado desde Firestore
       restauranteId: this.restauranteId,
       restauranteNombre: this.restauranteNombre,
       restauranteLogo: this.restauranteLogo,
@@ -176,17 +191,18 @@ export class ReservaPage implements OnInit {
     });
 
     this.router.navigate(['/reserva-confirmada'], {
-  state: {
-    restauranteNombre: this.restauranteNombre,
-    restauranteLogo: this.restauranteLogo,
-    nombreUsuario: localStorage.getItem('usuarioActivo'),
-    comensales: this.comensales,
-    fecha: this.fechaSeleccionada,
-    hora: this.horaSeleccionada,
-    direccion: this.direccionRestaurante,
-    telefono: this.telefonoRestaurante
-  }
-});
+      state: {
+        restauranteNombre: this.restauranteNombre,
+        restauranteLogo: this.restauranteLogo,
+        nombreUsuario: usuarioActivo,
+        comensales: this.comensales,
+        fecha: this.fechaSeleccionada,
+        hora: this.horaSeleccionada,
+        direccion: this.direccionRestaurante,
+        telefono: this.telefonoRestaurante,
+        usuarioFoto: usuarioFoto // ✅ correctamente transferido
+      }
+    });
 
   } catch (error) {
     console.error('Error al guardar la reserva:', error);

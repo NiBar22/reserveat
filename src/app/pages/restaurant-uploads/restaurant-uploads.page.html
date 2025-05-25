@@ -3,7 +3,8 @@
     <ion-icon name="arrow-back-outline" color = "dark"></ion-icon>
   </ion-button>
 
-  <p>Genial, completa tu registro añadiendo imágenes de tu restaurante</p>
+  <div class="container">
+  <h2>Sube el contenido de tu restaurante</h2>
 
   
   <h2>Menú:</h2>
@@ -20,8 +21,8 @@
   <ion-card (click)="uploadImages()" class="upload-card">
     <div class="upload-content">
       <ion-icon name="images-outline"></ion-icon>
-      <p *ngIf="restaurantImages.length === 0">Añadir imágenes</p>
-      <p *ngIf="restaurantImages.length > 0">{{ restaurantImages.length }} imagen(es) añadida(s)</p>
+      <p *ngIf="restaurantImages.length === 0">Añadir imágenes (min. 9)</p>
+      <p *ngIf="restaurantImages.length > 0">{{ restaurantImages.length }} imagenes añadidas</p>
     </div>
   </ion-card>
 
@@ -29,4 +30,5 @@
   <ion-button color = "light" expand="full" [disabled]="!canRegister()" (click)="registerRestaurant()">
     Registrarse
   </ion-button>
+  </div>
 </ion-content>

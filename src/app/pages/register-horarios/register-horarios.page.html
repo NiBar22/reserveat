@@ -1,22 +1,18 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Horarios y Reservas</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content class="ion-padding">
+  <!-- BOTÓN DE REGRESO -->
+<ion-button (click)="goBack()" color="light" class="back-button">
+  <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+</ion-button>
+
   <div class="container">
+    
     <h2>Configura tus horarios de atención</h2>
 
     <ion-card *ngFor="let dia of diasSemana">
       <ion-card-header>
         <ion-card-title class="capitalize">{{ dia }}</ion-card-title>
-        <ion-toggle [(ngModel)]="horarios[dia].abierto">Abierto</ion-toggle>
+        <ion-toggle [(ngModel)]="horarios[dia].abierto" aria-label="Medium toggle" color="medium">Abierto</ion-toggle>
       </ion-card-header>
       <ion-card-content *ngIf="horarios[dia].abierto">
         <ion-item>

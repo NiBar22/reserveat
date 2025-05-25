@@ -1,14 +1,11 @@
 ion-content {
   --background: #E9EDC9;
-  display: block; 
-  padding-top: 56px; 
+  display: block;
+  padding-top: 80px; // asegúrate de dar espacio debajo del botón
 }
 
 ion-toolbar {
   --background: #E9EDC9;
-}
-ion-icon {
-  font-size: 80px;
 }
 .container {
   width: 90%;
@@ -19,7 +16,7 @@ ion-icon {
   text-align: center;
   justify-content: center;
   margin: auto;
-  padding-top: 20px;
+  padding-top: 60px; // ✅ deja espacio debajo del botón
 }
 .input-container {
   display: flex;
@@ -96,14 +93,21 @@ ion-row {
   margin-bottom: 2px; 
 }
 
-
 .back-button {
-  background: black;
-  color: white; 
+  position: fixed;
+  top: 20px;
+  left: 16px;
+  z-index: 1000;
+  background: #000;
+  color: white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ion-icon {
+    font-size: 24px;
+  }
 }
