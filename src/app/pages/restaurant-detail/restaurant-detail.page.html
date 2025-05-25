@@ -46,9 +46,10 @@
         <div class="review-content">
           <div class="stars">
             <ion-icon *ngFor="let i of [1,2,3,4,5]"
-                      name="star"
-                      [color]="i <= r.promedio ? 'dark' : 'medium'">
-            </ion-icon>
+          name="star"
+          [color]="i <= (+r.promedio) ? 'warning' : 'medium'">
+</ion-icon>
+
           </div>
           <p class="comentario">"{{ r.comentario | slice:0:60 }}..."</p>
         </div>

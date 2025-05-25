@@ -16,11 +16,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
-
-
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.page.html',
@@ -161,15 +159,18 @@ export class ReservaPage implements OnInit {
   }
 
   const db = getFirestore();
-  const docRef = doc(db, 'comensales', usuarioActivo);
+
+  // ✅ Corrección: obtener la imagen desde el campo "fotoURL" buscando por campo, no por ID
   let usuarioFoto = '';
+  const comensalesRef = collection(db, 'comensales');
+  const q = query(comensalesRef, where('usuario', '==', usuarioActivo));
 
   try {
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      usuarioFoto = docSnap.data()['fotoURL'] || '';
-
-        }
+    const snapshot = await getDocs(q);
+    if (!snapshot.empty) {
+      const comensalDoc = snapshot.docs[0];
+      usuarioFoto = comensalDoc.data()['fotoURL'] || '';
+    }
   } catch (error) {
     console.warn('No se pudo obtener la foto del usuario desde Firestore:', error);
   }
@@ -177,7 +178,7 @@ export class ReservaPage implements OnInit {
   try {
     await addDoc(collection(db, 'reservas'), {
       usuario: usuarioActivo,
-      usuarioFoto: usuarioFoto, // ✅ correctamente cargado desde Firestore
+      usuarioFoto: usuarioFoto, // ✅ ahora correctamente obtenido desde Firestore
       restauranteId: this.restauranteId,
       restauranteNombre: this.restauranteNombre,
       restauranteLogo: this.restauranteLogo,
@@ -200,7 +201,7 @@ export class ReservaPage implements OnInit {
         hora: this.horaSeleccionada,
         direccion: this.direccionRestaurante,
         telefono: this.telefonoRestaurante,
-        usuarioFoto: usuarioFoto // ✅ correctamente transferido
+        usuarioFoto: usuarioFoto // ✅ transferido a la siguiente pantalla
       }
     });
 
@@ -209,6 +210,7 @@ export class ReservaPage implements OnInit {
     alert('Hubo un error al confirmar tu reserva. Intenta nuevamente.');
   }
 }
+
 
 
 }

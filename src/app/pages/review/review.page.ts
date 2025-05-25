@@ -51,7 +51,8 @@ export class ReviewPage implements OnInit {
   }
 
   async enviarReview() {
-    const promedio = Math.round((this.menu + this.atencion + this.espera) / 3);
+    const suma = Number(this.menu) + Number(this.atencion) + Number(this.espera);
+    const promedio = Math.round(suma / 3);
 
     const reviewData = {
   restauranteId: this.reserva.restauranteId,

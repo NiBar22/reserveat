@@ -15,8 +15,8 @@ import {
  import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Firestore, collection, query, where, orderBy, limit, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
- 
 
 @Component({
   selector: 'app-restaurant-detail',
@@ -99,8 +99,21 @@ obtenerReviewsRecientes(idRestaurante: string) {
     orderBy('fecha', 'desc'),
     limit(3)
   );
-  this.reviews$ = collectionData(q, { idField: 'id' });
+
+  this.reviews$ = collectionData(q, { idField: 'id' }).pipe(
+    map((reviews: any[]) =>
+      reviews.map(r => ({
+        ...r,
+        promedio: Number(r.promedio) // ✅ fuerza conversión a número
+      }))
+    )
+  );
 }
+
+public parseNumber(value: any): number {
+  return parseFloat(value);
+}
+
 
 
 }
