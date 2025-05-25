@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, star } from 'ionicons/icons';
+import { arrowBackOutline, star, starOutline, homeOutline, calendarOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-mis-reservas',
@@ -45,7 +45,7 @@ export class MisReservasPage implements OnInit {
   public constructor(
     public router: Router,
     private firestore: Firestore
-  ) {addIcons({arrowBackOutline,star});}
+  ) {addIcons({arrowBackOutline,star,starOutline,homeOutline,calendarOutline});}
 
   public ngOnInit() {
   const auth = getAuth();
@@ -92,10 +92,30 @@ console.log('Reservas filtradas:', this.reservasFiltradas);
 
 
   public calificarReserva(reserva: any): void {
-    this.router.navigate(['/review'], { state: { reserva } });
-  }
+  const reservaConLogo = {
+    ...reserva,
+    restauranteLogo: reserva.restauranteLogo || reserva.logoUrl || '',  // asegúrate que venga el logo
+    restauranteNombre: reserva.restauranteNombre || reserva.nombre || '',
+  };
+
+  this.router.navigate(['/review'], { state: { reserva: reservaConLogo } });
+}
+
 
   public goBack(): void {
     this.router.navigate(['/home-screen']);
   }
+
+  public irAMisReviews(): void {
+  this.router.navigate(['/mis-reviews']);
+}
+
+public irAHome(): void {
+  this.router.navigate(['/home-screen']);
+}
+
+public irAMisReservas(): void {
+  this.router.navigate(['/mis-reservas']);
+}
+
 }

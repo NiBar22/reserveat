@@ -53,16 +53,19 @@ export class ReviewPage implements OnInit {
     const promedio = Math.round((this.menu + this.atencion + this.espera) / 3);
 
     const reviewData = {
-      restauranteId: this.reserva.restauranteId,
-      comensalId: this.reserva.usuario,
-      nombreComensal: this.reserva.usuario,
-      comentario: this.comentario,
-      menu: this.menu,
-      atencion: this.atencion,
-      espera: this.espera,
-      promedio: promedio,
-      fecha: new Date().toISOString()
-    };
+  restauranteId: this.reserva.restauranteId,
+  restauranteNombre: this.reserva.restauranteNombre,
+  restauranteLogo: this.reserva.restauranteLogo,
+  comensalId: this.reserva.usuario,
+  nombreComensal: this.reserva.usuario,
+  comentario: this.comentario,
+  menu: this.menu,
+  atencion: this.atencion,
+  espera: this.espera,
+  promedio: promedio,
+  fecha: new Date().toISOString()
+};
+
 
     try {
       // Guardar review en la colección "reviews"

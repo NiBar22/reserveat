@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline } from 'ionicons/icons';
+import { arrowBackOutline, starOutline, homeOutline, calendarOutline } from 'ionicons/icons';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -27,7 +27,7 @@ export class RestaurantDetailPage implements OnInit {
   constructor(
     public router: Router,
     private route: ActivatedRoute
-  ) {addIcons({arrowBackOutline});}
+  ) {addIcons({arrowBackOutline,starOutline,homeOutline,calendarOutline});}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -60,4 +60,17 @@ export class RestaurantDetailPage implements OnInit {
       }
     });
   }
+
+  public irAMisReviews(): void {
+  this.router.navigate(['/mis-reviews']);
+}
+
+public irAHome(): void {
+  this.router.navigate(['/home-screen']);
+}
+
+public irAMisReservas(): void {
+  this.router.navigate(['/mis-reservas']);
+}
+
 }

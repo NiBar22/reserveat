@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-
+import { arrowBackOutline, star, starOutline, homeOutline, calendarOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-home-screen',
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
   ],
   templateUrl: './home-screen.page.html',
   styleUrls: ['./home-screen.page.scss']
@@ -20,7 +21,7 @@ export class HomeScreenPage implements OnInit {
   secondaryRestaurants: any[] = [];
   verticalRestaurants: any[] = [];
 
-  constructor(private firestore: Firestore, public router: Router) {}
+  constructor(private firestore: Firestore, public router: Router) {addIcons({arrowBackOutline,star,starOutline,homeOutline,calendarOutline});}
 
   ngOnInit() {
   const restaurantesRef = collection(this.firestore, 'restaurantes');
@@ -57,6 +58,17 @@ verDetalle(restaurant: any) {
   });
 }
 
+public irAMisReviews(): void {
+  this.router.navigate(['/mis-reviews']);
+}
+
+public irAHome(): void {
+  this.router.navigate(['/home-screen']);
+}
+
+public irAMisReservas(): void {
+  this.router.navigate(['/mis-reservas']);
+}
 
 
 

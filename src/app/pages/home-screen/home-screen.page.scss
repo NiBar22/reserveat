@@ -131,3 +131,24 @@ ion-card {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
   background-color: white;
 }
+
+.menu-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #ffffff;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+
+  ion-icon {
+    font-size: 24px;
+    color: #000000;
+    cursor: pointer;
+  }
+}
+

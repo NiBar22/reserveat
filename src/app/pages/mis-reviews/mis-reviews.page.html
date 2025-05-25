@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true">
+  <!-- BOTÓN DE REGRESO -->
+  <ion-button (click)="goBack()" color="light" class="back-button">
+    <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+  </ion-button>
+
+  <div class="container">
+    <h2 class="titulo">Calificaciones:</h2>
+
+    <div class="grid-cards">
+      <ion-card *ngFor="let review of misReviews" class="review-card">
+        <img [src]="review.restauranteLogo" class="logo-restaurante" />
+        <ion-card-content>
+          <h3>{{ review.nombreRestaurante }}</h3>
+          <p class="comentario">"{{ review.comentario }}"</p>
+
+          <div class="rating-line">
+            Atención:
+            <ion-icon *ngFor="let i of [1,2,3,4,5]"
+                      name="star"
+                      [color]="i <= review.atencion ? 'dark' : 'medium'"></ion-icon>
+          </div>
+          <div class="rating-line">
+            Menú:
+            <ion-icon *ngFor="let i of [1,2,3,4,5]"
+                      name="star"
+                      [color]="i <= review.menu ? 'dark' : 'medium'"></ion-icon>
+          </div>
+          <div class="rating-line">
+            Tiempo de espera:
+            <ion-icon *ngFor="let i of [1,2,3,4,5]"
+                      name="star"
+                      [color]="i <= review.espera ? 'dark' : 'medium'"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- MENÚ INFERIOR FIJO -->
+<div class="menu-inferior">
+  <ion-icon name="star-outline" (click)="irAMisReviews()"></ion-icon>
+  <ion-icon name="home-outline" (click)="irAHome()"></ion-icon>
+  <ion-icon name="calendar-outline" (click)="irAMisReservas()"></ion-icon>
+</div>
+
+</ion-content>
