@@ -1,13 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reserva-confirmada</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reserva-confirmada</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button (click)="goBack()" color="light" class="back-button">
+    <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+  </ion-button>
+
+  <div class="container">
+
+    <ion-card class="confirmation-card">
+      <ion-card-header class="confirmation-header">
+        <div class="restaurant-info">
+          <h2>{{ restauranteNombre }}</h2>
+          <p>{{ nombreUsuario }}</p>
+          <p>
+            <ion-icon name="people-outline"></ion-icon> {{ comensales }} comensales
+          </p>
+          <p>
+            <ion-icon name="calendar-outline"></ion-icon> {{ fecha }} - {{ hora }}
+          </p>
+        </div>
+        <img [src]="restauranteLogo" alt="Logo" class="confirmation-logo" />
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Dirección:</strong> {{ direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ telefono }}</p>
+        <p><strong>Código de reserva:</strong> {{ codigoReserva }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="full" color="dark" (click)="irAMisReservas()">
+      Ver mis reservas
+    </ion-button>
+  </div>
 </ion-content>

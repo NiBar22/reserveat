@@ -44,6 +44,10 @@ export class ReservaPage implements OnInit {
   public diasDisponibles: string[] = [];
   public horarios: any = {};
 
+  direccionRestaurante: string = '';
+  telefonoRestaurante: string = '';
+
+
   public today: string = new Date().toISOString().split('T')[0];
 
   public horasDisponibles: string[] = [];
@@ -57,7 +61,10 @@ export class ReservaPage implements OnInit {
       this.restauranteId = navState['id'];
       this.restauranteNombre = navState['nombre'];
       this.restauranteLogo = navState['logoUrl'];
-      this.horarios = navState['horarios'] || {};   
+      this.horarios = navState['horarios'] || {};
+      this.direccionRestaurante = navState['direccion'] || '';
+      this.telefonoRestaurante = navState['telefono'] || '';
+ 
      }
 
     this.extraerDiasDisponibles();
@@ -167,8 +174,19 @@ export class ReservaPage implements OnInit {
       timestamp: new Date()
     });
 
-    alert('¡Reserva confirmada con éxito!');
-    this.router.navigate(['/reserva-confirmada']); // la pantalla que mostrarás después
+    this.router.navigate(['/reserva-confirmada'], {
+  state: {
+    restauranteNombre: this.restauranteNombre,
+    restauranteLogo: this.restauranteLogo,
+    nombreUsuario: localStorage.getItem('usuarioActivo'),
+    comensales: this.comensales,
+    fecha: this.fechaSeleccionada,
+    hora: this.horaSeleccionada,
+    direccion: this.direccionRestaurante,
+    telefono: this.telefonoRestaurante
+  }
+});
+
   } catch (error) {
     console.error('Error al guardar la reserva:', error);
     alert('Hubo un error al confirmar tu reserva. Intenta nuevamente.');

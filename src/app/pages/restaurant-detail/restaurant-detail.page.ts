@@ -54,7 +54,9 @@ export class RestaurantDetailPage implements OnInit {
         id: this.restaurant.id,
         nombre: this.restaurant.nombreRestaurante,
         logoUrl: this.restaurant.logoUrl,
-        horarios: this.restaurant.horarios
+        horarios: this.restaurant.horarios,
+        direccion: this.restaurant.direccion || '',
+        telefono: this.restaurant.telefono || ''
       }
     });
   }

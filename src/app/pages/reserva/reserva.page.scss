@@ -1,6 +1,5 @@
 ion-content {
-  --background: #E9EDC9; // igual que el fondo general
-  height: 100%;
+  --background: #E9EDC9;
 }
 
 .back-button {
@@ -11,91 +10,50 @@ ion-content {
 }
 
 .container {
-  margin-top: 60px;
-  padding: 16px;
-  --background: #E9EDC9; 
-  color: #1a1a1a !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 80px 16px 24px; // más padding arriba por el botón
+  box-sizing: border-box;
+  gap: 20px;
 }
 
 .restaurant-banner {
-  --background: #ffffff;
+  width: 100%;
+  max-width: 400px;
   border-radius: 16px;
-  margin-bottom: 8px;
-  overflow: hidden; // importante para que la imagen respete el border-radius
+  overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .logo-full {
   width: 100%;
   height: auto;
-  display: block;
   object-fit: cover;
+  display: block;
 }
-
 
 .restaurant-title {
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   color: #1a1a1a;
-  margin-top: 8px;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
-
-
-.restaurant-summary {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  padding: 10px;
-}
-ion-card {
+ion-card,
+ion-item {
+  width: 100%;
+  max-width: 400px;
   border-radius: 16px;
   --background: #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-ion-item {
-      --background: #E9EDC9; 
-      color: #1a1a1a !important;
-
-}
-
-ion-datetime {
-  --background: #ffffff;
-  --color: #1a1a1a;
-  --placeholder-color: #1a1a1a;
-
-  color: #1a1a1a; // texto seleccionado
-  border-radius: 12px;
-
-  // si se requiere, fuerza color en elementos internos
-  .calendar-month,
-  .calendar-day,
-  .calendar-day div,
-  .calendar-day p {
-    color: #1a1a1a !important;
-  }
-
-  // mejora el contraste en encabezados y semana
-  .calendar-month-title,
-  .calendar-weekdays,
-  .calendar-weekday {
-    color: #1a1a1a !important;
-  }
-}
-
-
-.summary-content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-small {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 12px;
+ion-button {
+  margin-top: auto;
+  max-width: 400px;
+  width: 100%;
 }
