@@ -16,7 +16,8 @@ import { Firestore, collection, collectionData, query, where } from '@angular/fi
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
-
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-mis-reservas',
@@ -24,6 +25,7 @@ import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
   styleUrls: ['./mis-reservas.page.scss'],
   standalone: true,
   imports: [
+    IonIcon,
     CommonModule,
     FormsModule,
     IonContent,
@@ -43,7 +45,7 @@ export class MisReservasPage implements OnInit {
   public constructor(
     public router: Router,
     private firestore: Firestore
-  ) {}
+  ) {addIcons({arrowBackOutline});}
 
   public ngOnInit() {
   const auth = getAuth();
