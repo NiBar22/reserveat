@@ -165,6 +165,7 @@ export class ReservaPage implements OnInit {
       usuario: usuarioActivo,
       restauranteId: this.restauranteId,
       restauranteNombre: this.restauranteNombre,
+      restauranteLogo: this.restauranteLogo,
       fecha: this.fechaSeleccionada,
       hora: this.horaSeleccionada,
       comensales: this.comensales,

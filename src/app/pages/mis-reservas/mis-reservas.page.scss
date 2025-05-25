@@ -1,0 +1,90 @@
+ion-content {
+  --background: #E9EDC9; // Color de fondo general
+}
+
+.container {
+  padding: 16px;
+  background-color: #E9EDC9;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #1e1e1e;
+}
+
+ion-segment {
+  margin: 16px;
+  --background: #ffffff;
+  --indicator-color: #000000;
+}
+
+ion-segment-button {
+  --color-checked: #000000;
+  color: #999;
+}
+
+.reserva-card {
+  margin-bottom: 12px;
+}
+
+ion-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+}
+
+ion-card.opaca {
+  opacity: 0.4;
+}
+
+.contenido-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-reserva {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.info-reserva {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-reserva h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e1e1e;
+}
+
+.info-reserva p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.calificacion {
+  margin-top: 4px;
+}
+
+ion-icon {
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+ion-button.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  --background: transparent;
+}
