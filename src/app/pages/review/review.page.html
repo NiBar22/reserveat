@@ -1,23 +1,21 @@
-<ion-content [fullscreen]="true">
-  <!-- BOTÓN DE REGRESO -->
+<ion-content [fullscreen]="true" scroll-y="false">
+
   <ion-button (click)="goBack()" color="light" class="back-button">
     <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
   </ion-button>
 
-  <!-- LOGO DEL RESTAURANTE -->
   <div class="logo-container">
     <img [src]="reserva.restauranteLogo" alt="Logo Restaurante" class="restaurant-logo" />
   </div>
 
   <h3>¿Cómo fue tu experiencia?</h3>
 
-  <!-- CAMPOS DE CALIFICACIÓN -->
   <div class="rating-group">
     <label>Atención:</label>
     <div class="stars">
       <ion-icon *ngFor="let star of [1,2,3,4,5]"
                 name="star"
-                [color]="star <= atencion ? 'dark' : 'medium'"
+                [color]="star <= atencion ? 'warning' : 'medium'"
                 (click)="setRating('atencion', star)">
       </ion-icon>
     </div>
@@ -28,7 +26,7 @@
     <div class="stars">
       <ion-icon *ngFor="let star of [1,2,3,4,5]"
                 name="star"
-                [color]="star <= menu ? 'dark' : 'medium'"
+                [color]="star <= menu ? 'warning' : 'medium'"
                 (click)="setRating('menu', star)">
       </ion-icon>
     </div>
@@ -39,15 +37,13 @@
     <div class="stars">
       <ion-icon *ngFor="let star of [1,2,3,4,5]"
                 name="star"
-                [color]="star <= espera ? 'dark' : 'medium'"
+                [color]="star <= espera ? 'warning' : 'medium'"
                 (click)="setRating('espera', star)">
       </ion-icon>
     </div>
   </div>
 
-  <!-- COMENTARIO -->
   <ion-textarea placeholder="Review..." [(ngModel)]="comentario" maxlength="500"></ion-textarea>
 
-  <!-- BOTÓN DE ENVIAR -->
   <ion-button expand="block" (click)="enviarReview()">CALIFICAR</ion-button>
 </ion-content>

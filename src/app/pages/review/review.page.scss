@@ -1,10 +1,9 @@
 ion-content {
-  --background: #E9EDC9; // Color de fondo coherente con otras pantallas
+  --background: #FDEDD2; // tono crema más similar al mockup
 }
 
 .container {
   padding: 16px;
-  background-color: #E9EDC9;
 }
 
 .back-button {
@@ -17,53 +16,81 @@ ion-content {
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-top: 60px; // deja espacio para botón
-  margin-bottom: 20px;
+  margin-top: 60px;
+  margin-bottom: 12px;
 }
 
 .restaurant-logo {
-  width: 100%;
-  max-width: 250px;
-  border-radius: 16px;
-  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 12px;
+  background-color: white;
+  padding: 8px;
 }
 
 h3 {
   text-align: center;
-  font-size: 20px;
-  margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 16px;
 }
 
 .rating-group {
-  margin-bottom: 20px;
-  padding: 0 16px;
+  width: 85%;
+  margin: 12px auto;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .rating-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
   display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
 }
 
 .stars {
   display: flex;
   gap: 6px;
-  font-size: 24px;
+  font-size: 22px;
+  margin-top: 4px;
 }
 
 ion-icon {
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+ion-icon:hover {
+  transform: scale(1.2);
 }
 
 ion-textarea {
-  margin: 20px 16px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 8px;
-  background: white;
+  margin: 20px auto;
+  width: 90%;
+  border-radius: 12px;
+  padding: 12px;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: #1e1e1e;
+}
+
+ion-textarea::part(native) {
+  color: #1e1e1e;
 }
 
 ion-button {
   margin: 20px 16px;
   font-weight: bold;
+  --background: #1e1e1e; // Botón negro
+  --color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }

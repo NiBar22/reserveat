@@ -20,7 +20,7 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
   imports: [CommonModule, IonContent, IonSearchbar, IonButton, IonIcon, CommonModule, FormsModule, IonChip, IonHeader, IonToolbar, IonButtons]
 })
 export class SelectFiltersPage {
-  userType: string = 'comensal'; // Valor por defecto
+  userType: string = 'comensal';
   searchQuery: string = '';
   filters: string[] = [
     'Fast food', 'Temático', 'Buffet', 'Gourmet', 'Fusión', 'Familiar',
@@ -40,7 +40,6 @@ export class SelectFiltersPage {
   private firestore: Firestore) {
     addIcons({ arrowBackOutline });
 
-    // Detectar si el usuario es restaurante
     this.route.queryParams.subscribe(params => {
       this.userType = params['userType'] || 'comensal';
       this.maxFilters = this.userType === 'restaurant' ? 6 : 9;
@@ -112,20 +111,18 @@ if (this.userType === 'comensal') {
 
     const colRef = collection(this.firestore, 'restaurantes');
     await addDoc(colRef, restauranteFinal);
-
-    // Limpiar temporales
     localStorage.removeItem('restauranteData');
     localStorage.removeItem('restauranteConArchivos');
 
-    this.router.navigate(['/home-screen']);
+    this.router.navigate(['/login'], {
+      state: { restauranteCreado: true }
+    });
+
   } catch (error) {
     console.error('Error al finalizar registro:', error);
     this.errorMensaje = 'Ocurrió un error al guardar los datos. Intenta de nuevo.';
   }
 }
-
-
-
 
   goBack() {
     if (this.userType === 'restaurant') {

@@ -1,5 +1,5 @@
 ion-content {
-  --background: #E9EDC9; // igual que el fondo general
+  --background: #E9EDC9; 
   height: 100%;
 }
 
@@ -21,7 +21,7 @@ ion-content {
   --background: #ffffff;
   border-radius: 16px;
   margin-bottom: 8px;
-  overflow: hidden; // importante para que la imagen respete el border-radius
+  overflow: hidden; 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -67,10 +67,8 @@ ion-datetime {
   --color: #1a1a1a;
   --placeholder-color: #1a1a1a;
 
-  color: #1a1a1a; // texto seleccionado
+  color: #1a1a1a; 
   border-radius: 12px;
-
-  // si se requiere, fuerza color en elementos internos
   .calendar-month,
   .calendar-day,
   .calendar-day div,
@@ -78,7 +76,7 @@ ion-datetime {
     color: #1a1a1a !important;
   }
 
-  // mejora el contraste en encabezados y semana
+
   .calendar-month-title,
   .calendar-weekdays,
   .calendar-weekday {
@@ -99,3 +97,5 @@ ion-datetime {
   object-fit: cover;
   border-radius: 12px;
 }
+
+

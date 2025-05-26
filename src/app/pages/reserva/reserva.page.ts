@@ -1,24 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import {
-  IonItem,
-  IonLabel,
-  IonDatetime,
-  IonSelect,
-  IonSelectOption,
-  IonButton,
-  IonIcon,
-  IonInput
-} from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
 import { getFirestore, collection, addDoc, getDocs, query, where } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { getDoc, doc } from 'firebase/firestore';
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.page.html',
@@ -87,9 +74,9 @@ export class ReservaPage implements OnInit {
     return;
   }
 
-  const desde = horarioDelDia.desde; // ej: "12:00"
-  const hasta = horarioDelDia.hasta; // ej: "15:00"
-  const bloque = 60 / (horarioDelDia.reservasPorHora || 1); // duración entre reservas
+  const desde = horarioDelDia.desde; 
+  const hasta = horarioDelDia.hasta; 
+  const bloque = 60 / (horarioDelDia.reservasPorHora || 1); 
 
   const [horaDesde, minutoDesde] = desde.split(':').map(Number);
   const [horaHasta, minutoHasta] = hasta.split(':').map(Number);
@@ -160,7 +147,7 @@ export class ReservaPage implements OnInit {
 
   const db = getFirestore();
 
-  // ✅ Corrección: obtener la imagen desde el campo "fotoURL" buscando por campo, no por ID
+
   let usuarioFoto = '';
   const comensalesRef = collection(db, 'comensales');
   const q = query(comensalesRef, where('usuario', '==', usuarioActivo));
@@ -178,7 +165,7 @@ export class ReservaPage implements OnInit {
   try {
     await addDoc(collection(db, 'reservas'), {
       usuario: usuarioActivo,
-      usuarioFoto: usuarioFoto, // ✅ ahora correctamente obtenido desde Firestore
+      usuarioFoto: usuarioFoto, 
       restauranteId: this.restauranteId,
       restauranteNombre: this.restauranteNombre,
       restauranteLogo: this.restauranteLogo,
@@ -201,7 +188,7 @@ export class ReservaPage implements OnInit {
         hora: this.horaSeleccionada,
         direccion: this.direccionRestaurante,
         telefono: this.telefonoRestaurante,
-        usuarioFoto: usuarioFoto // ✅ transferido a la siguiente pantalla
+        usuarioFoto: usuarioFoto 
       }
     });
 

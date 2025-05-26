@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonInput, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { restaurantOutline, bodyOutline} from 'ionicons/icons';
 
@@ -11,7 +11,7 @@ import { restaurantOutline, bodyOutline} from 'ionicons/icons';
   selector: 'app-register-selection',
   templateUrl: './register-selection.page.html',
   styleUrls: ['./register-selection.page.scss'],
-  imports: [IonContent, IonInput, IonButton, CommonModule, FormsModule, IonIcon],
+  imports: [IonContent, IonButton, CommonModule, FormsModule, IonIcon],
 })
 export class RegisterSelectionPage {
   constructor(private router: Router) {

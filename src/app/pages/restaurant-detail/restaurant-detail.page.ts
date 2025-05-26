@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, starOutline, homeOutline, calendarOutline, star } from 'ionicons/icons';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent} from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   IonButtons,
@@ -23,7 +22,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './restaurant-detail.page.html',
   styleUrls: ['./restaurant-detail.page.scss'],
   standalone: true,
-    imports: [CommonModule,IonContent, IonIcon, IonButton, IonHeader, IonToolbar, IonButtons, IonCard, IonCardContent, IonTitle, ]
+    imports: [CommonModule,IonContent, IonIcon, IonButton, IonCard, IonCardContent ]
 })
 export class RestaurantDetailPage implements OnInit {
   restaurant: any = null;
@@ -104,7 +103,7 @@ obtenerReviewsRecientes(idRestaurante: string) {
     map((reviews: any[]) =>
       reviews.map(r => ({
         ...r,
-        promedio: Number(r.promedio) // ✅ fuerza conversión a número
+        promedio: Number(r.promedio) 
       }))
     )
   );

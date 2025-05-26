@@ -41,7 +41,7 @@ h2 {
   font-weight: bold;
   padding: 0 8px;
   margin-top: 0;
-  color: #222; // Tono oscuro legible
+  color: #222; 
 }
 .descripcion {
   text-align: left;
@@ -165,4 +165,9 @@ ion-button {
 .comentario {
   font-size: 0.85rem;
   color: #444;
+}
+ion-datetime {
+  display: block;
+  min-height: 250px;
+  z-index: 10;
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { Firestore, collection, query, where, collectionData } from '@angular/fire/firestore';
 import { IonicModule } from '@ionic/angular';
@@ -43,12 +41,11 @@ export class MisReviewsPage implements OnInit {
   }
 
   obtenerLogo(id: string): string {
-    // O puedes mejorarlo luego usando caché o consulta directa
-    return ''; // Placeholder por ahora
+    return ''; 
   }
 
   obtenerNombre(id: string): string {
-    return ''; // Placeholder
+    return ''; 
   }
 
   goBack(): void {

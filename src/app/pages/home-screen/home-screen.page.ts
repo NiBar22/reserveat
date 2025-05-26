@@ -26,7 +26,6 @@ export class HomeScreenPage implements OnInit {
   ngOnInit() {
   const restaurantesRef = collection(this.firestore, 'restaurantes');
   collectionData(restaurantesRef, { idField: 'id' }).subscribe((restaurantes: any[]) => {
-    // Aseguramos que cada restaurante tenga al menos una imagen
     const conImagen = restaurantes.filter(r => r.imagenes?.length > 0);
 
     this.featuredRestaurants = conImagen.slice(0, 3).map(r => ({

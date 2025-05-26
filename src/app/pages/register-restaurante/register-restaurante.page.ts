@@ -21,8 +21,7 @@ import { UserService } from '../../services/user.service';
   standalone: true,
   imports: [
     IonContent, IonInput, IonButton, IonIcon, CommonModule, FormsModule, 
-    IonCard, IonCardContent, IonCol, IonGrid, IonRow, IonHeader, IonTitle, 
-    IonToolbar, IonButtons,RouterModule
+    IonCard, IonCardContent, IonCol, IonGrid, IonRow, RouterModule
   ]
 })
 export class RegisterRestaurantePage {
@@ -118,8 +117,6 @@ export class RegisterRestaurantePage {
   }
 
     console.log('Registro exitoso');
-    //this.router.navigate(['/select-filters'], { queryParams: { userType: 'restaurant' } });
-
   }
   
 

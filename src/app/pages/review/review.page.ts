@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Firestore, collection, addDoc, doc, updateDoc } from '@angular/fire/firestore';
@@ -36,7 +35,7 @@ export class ReviewPage implements OnInit {
     const nav = history.state;
     if (nav && nav.reserva) {
       this.reserva = nav.reserva;
-      console.log("Reserva recibida:", this.reserva);  // Validar si incluye `id`
+      console.log("Reserva recibida:", this.reserva);  
     } else {
       this.router.navigate(['/mis-reservas']);
     }
@@ -71,18 +70,15 @@ export class ReviewPage implements OnInit {
 
 
     try {
-      // Guardar review en la colección "reviews"
+  
       const reviewsRef = collection(this.firestore, 'reviews');
       await addDoc(reviewsRef, reviewData);
-
-      // ✅ Marcar la reserva como calificada
       const reservaRef = doc(this.firestore, 'reservas', this.reserva.id);
       await updateDoc(reservaRef, {
                 calificado: true,
-                promedio: promedio  // nuevo campo para mostrar estrellas en reservas
+                promedio: promedio 
       });
 
-      // Redirigir a la pantalla de reseñas (o reservas si aún no existe esa)
       this.router.navigate(['/mis-reservas']);
 
     } catch (error) {

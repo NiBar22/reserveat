@@ -19,8 +19,7 @@ import { arrowBackOutline, peopleOutline, calendarOutline } from 'ionicons/icons
     IonIcon,
     IonCard,
     IonCardHeader,
-    IonCardContent,
-    IonCardTitle
+    IonCardContent
   ]})
 export class ReservaConfirmadaPage implements OnInit {
   restauranteNombre: string = '';

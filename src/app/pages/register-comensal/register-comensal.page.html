@@ -2,7 +2,6 @@
 
 <ion-content [fullscreen]="false">
 
-  <!-- BOTÓN DE REGRESO -->
 <ion-button (click)="goBack()" color="light" class="back-button">
   <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
 </ion-button>
@@ -14,7 +13,6 @@
       <ion-grid>
         <ion-row class="ion-align-items-center">
 
-          <!-- Zona para imagen de perfil -->
           <ion-col size="4" class="center-content">
             <div class="profile-picture" (click)="fileInput.click()">
               <img *ngIf="fotoPerfil; else defaultIcon" [src]="fotoPerfil" alt="Foto de perfil">
@@ -23,11 +21,9 @@
               </ng-template>
             </div>
 
-            <!-- Input oculto para seleccionar imagen -->
             <input type="file" accept="image/*" hidden #fileInput (change)="onFileSelected($event)">
           </ion-col>
 
-          <!-- Inputs principales -->
           <ion-col size="8" class="input-container">
             <ion-input placeholder="Usuario" [(ngModel)]="usuario"></ion-input>
             <ion-input placeholder="Nombres" [(ngModel)]="nombres"></ion-input>

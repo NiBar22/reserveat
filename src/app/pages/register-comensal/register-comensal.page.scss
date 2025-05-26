@@ -1,7 +1,7 @@
 ion-content {
   --background: #E9EDC9;
   display: block;
-  padding-top: 80px; // asegúrate de dar espacio debajo del botón
+  padding-top: 80px; 
 }
 
 ion-toolbar {
@@ -16,7 +16,7 @@ ion-toolbar {
   text-align: center;
   justify-content: center;
   margin: auto;
-  padding-top: 60px; // ✅ deja espacio debajo del botón
+  padding-top: 60px; 
 }
 .input-container {
   display: flex;

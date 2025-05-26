@@ -1,13 +1,11 @@
 <ion-content [fullscreen]="true">
-  <!-- BOTÓN DE REGRESO -->
-  <ion-button (click)="goBack()" color="light" class="back-button">
+    <ion-button (click)="goBack()" color="light" class="back-button">
     <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
   </ion-button>
 
-  <!-- TÍTULO -->
+  
   <h2 class="titulo">Mis Reservas</h2>
-
-  <!-- FILTROS -->
+  
   <ion-segment [(ngModel)]="estadoActual" (ionChange)="filtrarReservas()" scrollable>
     <ion-segment-button value="activa">
       <ion-label>Activas</ion-label>
@@ -20,21 +18,17 @@
     </ion-segment-button>
   </ion-segment>
 
-  <!-- LISTA DE RESERVAS -->
-  <div *ngFor="let reserva of reservasFiltradas">
+   <div *ngFor="let reserva of reservasFiltradas">
     <ion-card [class.opaca]="reserva.estado === 'expirada'">
       <ion-card-content class="contenido-card">
-        <!-- LOGO -->
+      
         <img [src]="reserva.restauranteLogo" class="logo-reserva" />
 
-        <!-- INFO -->
         <div class="info-reserva">
           <h3>{{ reserva.nombre }}</h3>
           <p>{{ reserva.comensales }} comensales</p>
           <p>{{ reserva.fecha }}</p>
 
-          <!-- Cumplidas -->
-          <!-- Cumplidas -->
 <ng-container *ngIf="reserva.estado === 'cumplida'">
   <ng-container *ngIf="reserva.calificado === true; else calificar">
   <div class="calificacion">
@@ -46,9 +40,9 @@
   </div>
 </ng-container>
   <ng-template #calificar>
-    <ion-button size="small" fill="clear" color="dark" (click)="calificarReserva(reserva)">
-      Calificar
-    </ion-button>
+    <ion-button class="calificar-btn" (click)="calificarReserva(reserva)">
+  Calificar
+</ion-button>
   </ng-template>
 </ng-container>
 
@@ -60,9 +54,8 @@
   <ion-card *ngIf="reservasFiltradas.length === 0">
     <ion-card-content>No hay reservas en esta categoría.</ion-card-content>
   </ion-card>
-
-  <!-- MENÚ INFERIOR FIJO -->
-<div class="menu-inferior">
+  
+  <div class="menu-inferior">
   <ion-icon name="star-outline" (click)="irAMisReviews()"></ion-icon>
   <ion-icon name="home-outline" (click)="irAHome()"></ion-icon>
   <ion-icon name="calendar-outline" (click)="irAMisReservas()"></ion-icon>

@@ -93,7 +93,7 @@ console.log('Reservas filtradas:', this.reservasFiltradas);
   public calificarReserva(reserva: any): void {
   const reservaConLogo = {
     ...reserva,
-    restauranteLogo: reserva.restauranteLogo || reserva.logoUrl || '',  // asegúrate que venga el logo
+    restauranteLogo: reserva.restauranteLogo || reserva.logoUrl || '',
     restauranteNombre: reserva.restauranteNombre || reserva.nombre || '',
   };
 

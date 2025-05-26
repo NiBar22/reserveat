@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #E9EDC9; /* Fondo igual en ambas pantallas */
+  background-color: #E9EDC9; 
 
   .logo {
     width: 80px;
@@ -27,12 +27,12 @@
     width: 80%;
     background: #ffffff;
     color: #000000;
-    padding: 12px; // Agrega espacio interno
-  --padding-start: 12px; // Ajusta el margen izquierdo
-  --padding-end: 12px; // Ajusta el margen derecho
-  border-radius: 10px; // Bordes redondeados opcionales
+    padding: 12px; 
+  --padding-start: 12px; 
+  --padding-end: 12px; 
+  border-radius: 10px; 
     margin: 10px 0;
-    --placeholder-color: #999999; /* Para que el placeholder sea visible */
+    --placeholder-color: #999999; 
   }
 
   ion-button {
@@ -49,4 +49,13 @@
     margin-top: 10px;
     cursor: pointer;
   }
+}
+.error-message {
+  color: #b00020; 
+  text-align: center;
+  margin-top: 12px;
+}
+
+.success {
+  color: #2e7d32; 
 }

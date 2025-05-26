@@ -28,7 +28,13 @@ public errorMensaje: string = '';
   constructor(private firestore: Firestore,
     public router: Router) {addIcons({alertCircleOutline});}
 
-  ngOnInit() {}
+  ngOnInit() {
+  const navState = window.history.state;
+  if (navState && navState.restauranteCreado) {
+    this.errorMensaje = '¡Restaurante creado con éxito!';
+  }
+}
+
 
   async login(): Promise<void> {
     if (!this.usuario || !this.password) {

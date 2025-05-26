@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonInput, IonButton, IonSelect, IonSelectOption,
-  IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
-  IonCol, IonGrid, IonRow, IonHeader, IonTitle, IonToolbar, IonButtons
-} from '@ionic/angular/standalone';
+  IonIcon, IonCard, IonCol, IonGrid, IonRow,} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { logoIonic, arrowUndoOutline, imageOutline, arrowBackOutline, alertCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
@@ -22,9 +20,7 @@ import { getFirestore, collection, addDoc } from 'firebase/firestore';
   standalone: true,
   imports: [
     IonContent, IonInput, IonButton, IonSelect, IonSelectOption, IonIcon,
-    CommonModule, FormsModule, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonRow, IonHeader, IonTitle, IonToolbar, IonButtons,
-    RouterModule
+    CommonModule, FormsModule, IonCard, IonCol, IonGrid, IonRow, RouterModule
   ]
 })
 export class RegisterComensalPage {

@@ -1,12 +1,9 @@
 <ion-content [fullscreen]="true">
-  <!-- BOTÓN DE REGRESO (mismo estilo que detail) -->
   <ion-button (click)="goBack()" color="light" class="back-button">
     <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
   </ion-button>
 
   <div class="container">
-
-    <!-- CARD CON LOGO Y NOMBRE -->
     <ion-card class="restaurant-banner">
   <img [src]="restauranteLogo" class="logo-full" />
 </ion-card>
@@ -14,22 +11,23 @@
 
 <h2 class="restaurant-title">{{ restauranteNombre }}</h2>
 
+   <ion-item>
+  <ion-label position="stacked">Selecciona la fecha</ion-label>
+  <ion-input
+    type="date"
+    [(ngModel)]="fechaSeleccionada"
+    [min]="today"
+    placeholder="📅 Toca aquí para abrir el calendario"
+    (ionChange)="onFechaSeleccionada({ detail: { value: fechaSeleccionada } })">
+  </ion-input>
+</ion-item>
 
-    <!-- CALENDARIO -->
-    <ion-item>
-      <ion-label position="stacked">Selecciona la fecha</ion-label>
-      <ion-datetime
-        presentation="date"
-        [(ngModel)]="fechaSeleccionada"
-        [min]="today"
-        (ionChange)="onFechaSeleccionada($event)">
-      </ion-datetime>
-      <ion-text color="danger" *ngIf="fechaSeleccionada && horasDisponibles.length === 0">
+
+<ion-text color="danger" *ngIf="fechaSeleccionada && horasDisponibles.length === 0">
   Este día no está disponible para reservas.
 </ion-text>
-    </ion-item>
 
-    <!-- COMENSALES -->
+
     <ion-item>
       <ion-label>Comensales</ion-label>
       <ion-buttons slot="end">
@@ -38,8 +36,6 @@
         <ion-button (click)="aumentar()">+</ion-button>
       </ion-buttons>
     </ion-item>
-
-    <!-- SELECCIÓN DE HORA -->
     <ion-item>
       <ion-label position="stacked">Hora</ion-label>
       <ion-select [(ngModel)]="horaSeleccionada" placeholder="Selecciona una hora">
@@ -49,7 +45,6 @@
       </ion-select>
     </ion-item>
 
-    <!-- CONFIRMAR -->
     <ion-button expand="full" color="dark" (click)="confirmarReserva()">
       Confirmar reserva
     </ion-button>

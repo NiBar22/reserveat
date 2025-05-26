@@ -3,13 +3,10 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  IonHeader,
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
   IonContent,
-  IonToolbar,
-  IonButtons,
   IonButton,
   IonIcon,
   IonToggle,
@@ -17,7 +14,6 @@ import {
   IonItem,
   IonInput,
   IonLabel,
-  IonTitle
 } from '@ionic/angular/standalone';
 import { arrowBackOutline } from 'ionicons/icons';
 
@@ -27,12 +23,9 @@ import { arrowBackOutline } from 'ionicons/icons';
   styleUrls: ['./register-horarios.page.scss'],
   standalone: true,
   imports: [
-  IonHeader,
   CommonModule,
   FormsModule,
   IonContent,
-  IonToolbar,
-  IonButtons,
   IonButton,
   IonIcon,
   IonToggle,
@@ -42,8 +35,7 @@ import { arrowBackOutline } from 'ionicons/icons';
   IonCardContent,
   IonItem,
   IonInput,
-  IonLabel,
-  IonTitle
+  IonLabel
 ]
 
 })
